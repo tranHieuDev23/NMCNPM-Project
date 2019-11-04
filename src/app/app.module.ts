@@ -14,7 +14,7 @@ import { HomeComponent } from './views/pages/home/home.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatCardModule,
     FlexLayoutModule,
-    MatListModule
+    MatListModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
