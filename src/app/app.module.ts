@@ -9,8 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { HomeComponent } from './views/pages/home/home.component'
+import { MatCardModule } from '@angular/material/card';
+import { HomeComponent } from './views/pages/home/home.component';
+import { FlexLayoutModule } from "@angular/flex-layout"
+import { MatSidenavModule } from '@angular/material/sidenav'
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { HomeComponent } from './views/pages/home/home.component'
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatGridListModule
+    MatSidenavModule,
+    MatCardModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
