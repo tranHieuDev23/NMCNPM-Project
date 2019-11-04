@@ -11,8 +11,9 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './views/pages/home/home.component';
-import { FlexLayoutModule } from "@angular/flex-layout"
-import { MatSidenavModule } from '@angular/material/sidenav'
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MatSidenavModule } from '@angular/material/sidenav'
     MatButtonModule,
     MatSidenavModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
