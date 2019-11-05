@@ -13,11 +13,11 @@
     <mat-sidenav-content style="padding: 24px;">
         <div *ngIf="selectedProduct" fxLayout="row" style="margin-bottom: 24px">
             <div fxFlex="50%">
-                <img src="{{ selectedProduct.image }}" class="responsive-img" />
+                <img src="{{ selectedProduct.getImage() }}" class="responsive-img" />
             </div>
             <div fxFlex="50%" style="padding-left: 24px">
-                <h2>{{ selectedProduct.name }}</h2>
-                <p>{{ selectedProduct.descriptionDetail }}</p>
+                <h2>{{ selectedProduct.getName() }}</h2>
+                <p>{{ selectedProduct.getDescriptionDetail() }}</p>
                 <a mat-flat-button style="margin-right: 4px;">Xem thêm</a>
                 <a mat-flat-button>Mua ngay</a>
             </div>
