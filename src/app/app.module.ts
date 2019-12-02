@@ -15,13 +15,18 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProductComponent } from './views/pages/product/product.component';
+import { SafeHtmlPipe } from './views/pipes/safe-html/safe-html.pipe';
+import { SliderModule } from 'angular-image-slider';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    ProductComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatCardModule,
     FlexLayoutModule,
     MatListModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    SliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

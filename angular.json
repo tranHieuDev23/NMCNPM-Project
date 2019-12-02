@@ -128,5 +128,10 @@
       }
     }
   },
-  "defaultProject": "Lab8"
+  "defaultProject": "Lab8",
+  "cli": {
+    "warnings": {
+      "versionMismatch": false
+    }
+  }
 }

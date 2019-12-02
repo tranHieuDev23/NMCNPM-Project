@@ -1,0 +1,35 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
+        <mat-list>
+            <mat-list-item><h2>Các loại sản phẩm</h2></mat-list-item>
+            <mat-list-item>
+                <button mat-raised-button (click)="loadAllProduct()">Tất cả sản phẩm</button>
+            </mat-list-item>
+            <mat-list-item *ngFor="let category of categories">
+                <button mat-raised-button (click)="setSelectedCategory(category)">{{ category.name }}</button>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content style="padding: 24px;">
+        <div *ngIf="product" fxLayout="row" style="margin-bottom: 24px">
+            <div fxFlex="30%">
+                <img src="{{ product.getImage() }}" class="responsive-img" />
+            </div>
+            <div fxFlex="70%" style="padding-left: 24px">
+                <h2>{{ product.getName() }}</h2>
+                <p>{{ product.getDescriptionDetail() }}</p>
+                <p>{{ product.getPrice() }} VND</p>
+                <a mat-raised-button>Mua ngay</a>
+            </div>
+        </div>
+        <div *ngIf="(product != null) && (product.getDetail() != null)">
+            <h3>Thông tin sản phẩm</h3>
+            <div id="information" [innerHtml]="product.getDetail().getInformation() | safeHtml"></div>
+            <h3>Phụ kiện</h3>
+            <div id="information" [innerHtml]="product.getDetail().getAccessories() | safeHtml"></div>
+            <h3>Chính sách bảo hành</h3>
+            <div id="information" [innerHtml]="product.getDetail().getGuaranty() | safeHtml"></div>
+            <angular-image-slider [images]="images"></angular-image-slider>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
