@@ -3,31 +3,31 @@ import Product from '../models/product';
 import Category from '../models/category';
 
 const CATEGORIES: Category[] = [
-  new Category(1, "Laptop", ""),
-  new Category(2, "Smartphone", ""),
-  new Category(3, "Accessory", "")
+  new Category(1, "Laptop", "https://www.mageplaza.com/assets/img/extensions/product-labels.png"),
+  new Category(2, "Smartphone", "https://www.mageplaza.com/assets/img/extensions/product-labels.png"),
+  new Category(3, "Accessory", "https://www.mageplaza.com/assets/img/extensions/product-labels.png")
 ];
 
 const PRODUCTS: Product[] = [
   new Product(1, "USB", 200, "An USB", "A very cool USB", 
-    "",
-    "",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     null, CATEGORIES[2], null),
   new Product(2, "Macbook", 20000, "Macbook from Apple", "A very expensive product", 
-    "",
-    "",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     null, CATEGORIES[0], null),
   new Product(3, "Dell Laptop", 10000, "Laptop from Dell", "A less expensive product", 
-    "",
-    "",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     null, CATEGORIES[0], null),
   new Product(4, "Smartphone", 500, "Unspecified smartphone", "Probably manufactured from Vietnam", 
-    "",
-    "",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     null, CATEGORIES[1], null),
   new Product(5, "SD Card", 20, "Store information in a small size", "Usually found in camera", 
-    "",
-    "",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     null, CATEGORIES[2], null),
 ];
 
