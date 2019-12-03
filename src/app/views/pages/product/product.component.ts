@@ -11,7 +11,7 @@ import { OrderPopupComponent } from '../../elements/order-popup/order-popup.comp
   templateUrl: "./product.component.html",
   styleUrls: ["./product.component.scss"]
 })
-export class ProductComponent implements OnInit {
+export class ProductPageComponent implements OnInit {
   public categories: Category[];
   public product: Product;
   public images: String[];

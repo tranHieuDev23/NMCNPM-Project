@@ -10,29 +10,31 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { HomeComponent } from './views/pages/home/home.component';
+import { HomePageComponent } from './views/pages/home/home.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ProductComponent } from './views/pages/product/product.component';
+import { ProductPageComponent } from './views/pages/product/product.component';
 import { SafeHtmlPipe } from './views/pipes/safe-html/safe-html.pipe';
 import { SliderModule } from 'angular-image-slider';
 import { ShoppingCartModule } from 'ng-shopping-cart';
 import ProductCartItem from './models/cart-item';
 import { OrderPopupComponent } from './views/elements/order-popup/order-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { CartPageComponent } from './views/pages/cart/cart.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
-    ProductComponent,
+    HomePageComponent,
+    ProductPageComponent,
     SafeHtmlPipe,
-    OrderPopupComponent
+    OrderPopupComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { FormsModule } from '@angular/forms';
     ShoppingCartModule.forRoot({
       itemType: ProductCartItem
     }),
-    MatDialogModule
+    MatDialogModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -10,7 +10,7 @@ import { OrderPopupComponent } from '../../elements/order-popup/order-popup.comp
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   public products: Product[] = [];
   public categories: Category[] = [];
   public selectedProduct: Product = null;
