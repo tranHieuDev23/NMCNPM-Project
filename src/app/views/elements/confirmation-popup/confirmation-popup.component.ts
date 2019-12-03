@@ -1,22 +1,24 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CartService } from "ng-shopping-cart";
 import ProductCartItem from "src/app/models/cart-item";
 import { MatDialogRef } from "@angular/material/dialog";
 import Customer from "src/app/models/customer";
 import Order from "src/app/models/order";
 import { OrderService } from "src/app/controllers/order.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: "app-confirmation-popup",
   templateUrl: "./confirmation-popup.component.html",
   styleUrls: ["./confirmation-popup.component.scss"]
 })
-export class ConfirmationPopupComponent {
+export class ConfirmationPopupComponent implements OnInit {
   public name: string = "";
   public email: string = "";
   public phone: string = "";
   public address: string = "";
   public cityRegion: string = "";
+  public products: ProductCartItem[];
 
   public allCityRegion: string[] = [
     "An Giang",
@@ -84,8 +86,13 @@ export class ConfirmationPopupComponent {
   constructor(
     private cartService: CartService<ProductCartItem>,
     private orderService: OrderService,
-    private dialogRef: MatDialogRef<ConfirmationPopupComponent>
+    private dialogRef: MatDialogRef<ConfirmationPopupComponent>,
+    private snackbar: MatSnackBar
   ) {}
+
+  ngOnInit() {
+    this.products = this.cartService.getItems();
+  }
 
   onPurchasing(): void {
     const customer = new Customer(
@@ -96,14 +103,15 @@ export class ConfirmationPopupComponent {
       this.address,
       this.cityRegion
     );
-    const products = this.cartService.getItems();
-    const order = new Order(customer, products);
+    const order = new Order(customer, this.products);
     this.orderService.addOrder(order).then(
       result => {
         this.dialogRef.close(true);
+        this.snackbar.open("Đơn hàng đã được tạo thành công! Chúng tôi sẽ sớm liên lạc lại với bạn");
       },
       error => {
         this.dialogRef.close(false);
+        this.snackbar.open("Có lỗi xảy ra trong quá trình tạo đơn hàng!");
       }
     );
   }

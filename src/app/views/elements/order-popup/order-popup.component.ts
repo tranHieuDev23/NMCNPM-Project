@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Product from 'src/app/models/product';
 import { CartService } from 'ng-shopping-cart';
 import ProductCartItem from 'src/app/models/cart-item';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-popup',
@@ -16,7 +18,9 @@ export class OrderPopupComponent {
   constructor(
     private cartService: CartService<ProductCartItem>,
     private dialogRef: MatDialogRef<OrderPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbar: MatSnackBar,
+    private router: Router
   ) {
     this.product = data.product;
     if (this.product != null) {
@@ -35,6 +39,9 @@ export class OrderPopupComponent {
       this.cartService.removeItem(this.product.getProductId());
     } else {
       this.cartService.addItem(ProductCartItem.fromProduct(this.product, this.quantity));
+      this.snackbar.open("Giỏ hàng đã được cập nhật!", "Xem giỏ hàng").onAction().subscribe(() => {
+        this.router.navigateByUrl("/cart")
+      });
     }
     this.dialogRef.close(true);
   }

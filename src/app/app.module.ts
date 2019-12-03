@@ -31,6 +31,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { ConfirmationPopupComponent } from "./views/elements/confirmation-popup/confirmation-popup.component";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatInputModule } from "@angular/material/input";
     MatPaginatorModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
