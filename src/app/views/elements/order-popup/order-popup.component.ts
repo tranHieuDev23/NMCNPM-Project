@@ -31,7 +31,6 @@ export class OrderPopupComponent {
   }
 
   onOrder(): void {
-    console.log(this.quantity);
     if (this.quantity == 0) {
       this.cartService.removeItem(this.product.getProductId());
     } else {

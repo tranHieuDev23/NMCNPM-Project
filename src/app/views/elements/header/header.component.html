@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <a mat-button color="white" routerLink="/">Home</a>
     <a mat-button color="white">Các loại sản phẩm</a>
-    <a mat-button color="white" matBadge="8" matBadgePosition="after" matBadgeColor="accent" routerLink="/cart">Giỏ hàng</a>
+    <a mat-button color="white" [matBadgeHidden]="numberOfItems == 0" [matBadge]="numberOfItems" matBadgePosition="after" matBadgeColor="warn" routerLink="/cart" matBadgeSize="small">Giỏ hàng</a>
     <span class="fill-remaining-space"></span>
     <a mat-button color="white">Nhóm 2</a>
 </mat-toolbar>
