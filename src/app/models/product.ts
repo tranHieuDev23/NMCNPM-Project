@@ -3,16 +3,16 @@ import Category from './category';
 
 class Product {
     constructor(
-        private productId: number,
-        private name: string,
-        private price: number,
-        private description: string,
-        private descriptionDetail: string,
-        private image: string,
-        private thumbImage: string,
-        private lastUpdate: Date,
-        private category: Category,
-        private detail: ProductDetail
+        public productId: number,
+        public name: string,
+        public price: number,
+        public description: string,
+        public descriptionDetail: string,
+        public image: string,
+        public thumbImage: string,
+        public lastUpdate: Date,
+        public category: Category,
+        public detail: ProductDetail
     ) { }
 
     public getProductId(): number { return this.productId; }

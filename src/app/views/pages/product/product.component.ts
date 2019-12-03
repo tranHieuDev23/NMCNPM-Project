@@ -3,6 +3,8 @@ import Product from "src/app/models/product";
 import { ProductRetrieverService } from "src/app/controllers/product-retriever.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import Category from 'src/app/models/category';
+import { MatDialog } from '@angular/material/dialog';
+import { OrderPopupComponent } from '../../elements/order-popup/order-popup.component';
 
 @Component({
   selector: "app-product",
@@ -16,7 +18,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductRetrieverService
+    private productService: ProductRetrieverService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -59,5 +62,13 @@ export class ProductComponent implements OnInit {
         this.product = null;
       }
     );
+  }
+
+  openDialog(): void {
+    this.dialog.open(OrderPopupComponent, {
+      data: {
+        product: this.product
+      }
+    });
   }
 }

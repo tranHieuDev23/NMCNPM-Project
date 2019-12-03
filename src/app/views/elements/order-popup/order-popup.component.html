@@ -1,0 +1,14 @@
+<h1 *ngIf="product" mat-dialog-title>Chọn số lượng sản phẩm {{ product.getName() }} bạn muốn mua:</h1>
+<div mat-dialog-content fxLayout="row" fxLayoutAlign="center center">
+    <button fxFlex="15%" mat-stroked-button (click)="changeQuantity(1)">+</button>
+    <div fxFlex="30%">
+        <span id="quantity">
+            {{ quantity }}
+        </span>
+    </div>
+    <button fxFlex="15%" mat-stroked-button (click)="changeQuantity(-1)">-</button>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onOrder()">OK</button>
+    <button mat-button (click)="onNoClick()">Hủy</button>
+</div>

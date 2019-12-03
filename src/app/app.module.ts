@@ -18,6 +18,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductComponent } from './views/pages/product/product.component';
 import { SafeHtmlPipe } from './views/pipes/safe-html/safe-html.pipe';
 import { SliderModule } from 'angular-image-slider';
+import { ShoppingCartModule } from 'ng-shopping-cart';
+import ProductCartItem from './models/cart-item';
+import { OrderPopupComponent } from './views/elements/order-popup/order-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,8 @@ import { SliderModule } from 'angular-image-slider';
     FooterComponent,
     HomeComponent,
     ProductComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    OrderPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +46,16 @@ import { SliderModule } from 'angular-image-slider';
     MatListModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    SliderModule
+    SliderModule,
+    ShoppingCartModule.forRoot({
+      itemType: ProductCartItem
+    }),
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    OrderPopupComponent
+  ]
 })
 export class AppModule { }

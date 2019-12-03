@@ -20,7 +20,7 @@
                 <p>{{ selectedProduct.getDescriptionDetail() }}</p>
                 <p>{{ selectedProduct.getPrice() }} VND</p>
                 <a mat-raised-button style="margin-right: 4px;" routerLink="/product/{{ selectedProduct.getProductId() }}">Xem thêm</a>
-                <a mat-raised-button>Mua ngay</a>
+                <a mat-raised-button (click)='openDialog()'>Mua ngay</a>
             </div>
         </div>
         <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="center stretch">
