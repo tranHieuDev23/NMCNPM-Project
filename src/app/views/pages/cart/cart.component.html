@@ -1,1 +1,16 @@
-<p>cart works!</p>
+<div id="content">
+    <h1>Thông tin giỏ hàng</h1>
+    
+    <cart-view [emptyText]="headers.empty" [nameHeaderText]="headers.name" [quantityHeaderText]="headers.quantity"
+        [priceHeaderText]="headers.price" [totalHeaderText]="headers.total" [taxFooterText]="footers.tax"
+        [shippingFooterText]="footers.shipping" [totalFooterText]="footers.total" [customEmptyContent]="true">
+        Không có gì trong giỏ hàng cả
+    </cart-view>
+
+    <div id="cart-buttons">
+        <button mat-raised-button type="button" color="warn" style="margin-right: 4px">Dọn sạch giỏ hàng</button>
+        <cart-checkout [custom]="true">
+            <button mat-raised-button type="button" color="primary">Thanh toán</button>
+        </cart-checkout>
+    </div>
+</div>
