@@ -1,0 +1,13 @@
+<mat-list>
+    <mat-list-item>
+        <h2>Các loại sản phẩm</h2>
+    </mat-list-item>
+    <mat-list-item>
+        <button mat-raised-button routerLink="/">Tất cả sản phẩm</button>
+    </mat-list-item>
+    <mat-list-item *ngFor="let category of categories">
+        <button mat-raised-button routerLink="/category/{{ category.getCategoryId() }}">
+            {{ category.getName() }}
+        </button>
+    </mat-list-item>
+</mat-list>

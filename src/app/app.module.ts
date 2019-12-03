@@ -24,6 +24,8 @@ import { OrderPopupComponent } from './views/elements/order-popup/order-popup.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { CartPageComponent } from './views/pages/cart/cart.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { SidebarComponent } from './views/elements/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     ProductPageComponent,
     SafeHtmlPipe,
     OrderPopupComponent,
-    CartPageComponent
+    CartPageComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { MatBadgeModule } from '@angular/material/badge';
       itemType: ProductCartItem
     }),
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

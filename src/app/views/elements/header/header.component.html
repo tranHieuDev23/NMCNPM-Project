@@ -1,7 +1,13 @@
 <mat-toolbar color="primary">
     <a mat-button color="white" routerLink="/">Home</a>
-    <a mat-button color="white">Các loại sản phẩm</a>
-    <a mat-button color="white" [matBadgeHidden]="numberOfItems == 0" [matBadge]="numberOfItems" matBadgePosition="after" matBadgeColor="warn" routerLink="/cart" matBadgeSize="small">Giỏ hàng</a>
+    <a mat-button [matMenuTriggerFor]="menu" color="white">Các loại sản phẩm</a>
+    <mat-menu #menu="matMenu">
+        <button *ngFor="let category of categories" mat-menu-item routerLink="/category/{{ category.getCategoryId() }}">
+            {{ category.getName() }}
+        </button>
+    </mat-menu>
+    <a mat-button color="white" [matBadgeHidden]="numberOfItems == 0" [matBadge]="numberOfItems"
+        matBadgePosition="after" matBadgeColor="warn" routerLink="/cart" matBadgeSize="small">Giỏ hàng</a>
     <span class="fill-remaining-space"></span>
     <a mat-button color="white">Nhóm 2</a>
 </mat-toolbar>

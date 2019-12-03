@@ -6,6 +6,7 @@ import { CartPageComponent } from "./views/pages/cart/cart.component";
 
 const appRoutes: Routes = [
   { path: "product/:product-id", component: ProductPageComponent },
+  { path: "category/:category-id", component: HomePageComponent },
   { path: "cart", component: CartPageComponent },
   { path: "", component: HomePageComponent }
 ];

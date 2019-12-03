@@ -1,14 +1,6 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened>
-        <mat-list>
-            <mat-list-item><h2>Các loại sản phẩm</h2></mat-list-item>
-            <mat-list-item>
-                <button mat-raised-button (click)="loadAllProduct()">Tất cả sản phẩm</button>
-            </mat-list-item>
-            <mat-list-item *ngFor="let category of categories">
-                <button mat-raised-button (click)="setSelectedCategory(category)">{{ category.name }}</button>
-            </mat-list-item>
-        </mat-list>
+        <app-sidebar></app-sidebar>
     </mat-sidenav>
     <mat-sidenav-content style="padding: 24px;">
         <div *ngIf="product" fxLayout="row" style="margin-bottom: 24px">

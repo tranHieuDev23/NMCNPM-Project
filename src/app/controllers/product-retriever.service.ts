@@ -54,6 +54,18 @@ export class ProductRetrieverService {
     });
   }
 
+  public getCategory(categoryId: number): Promise<Category> {
+    return new Promise((resolve, reject) => {
+      for(let i = 0; i < CATEGORIES.length; i ++) {
+        if (CATEGORIES[i].getCategoryId() == categoryId) {
+          resolve(CATEGORIES[i]);
+          return;
+        }
+      }
+      reject("No such category!");
+    });
+  }
+
   public getProducts(withDetail: boolean = false): Promise<Product[]> {
     return new Promise((resolve, reject) => {
       resolve(PRODUCTS);

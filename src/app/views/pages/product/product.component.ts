@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import Product from "src/app/models/product";
 import { ProductRetrieverService } from "src/app/controllers/product-retriever.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import Category from 'src/app/models/category';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderPopupComponent } from '../../elements/order-popup/order-popup.component';
 
@@ -12,7 +11,6 @@ import { OrderPopupComponent } from '../../elements/order-popup/order-popup.comp
   styleUrls: ["./product.component.scss"]
 })
 export class ProductPageComponent implements OnInit {
-  public categories: Category[];
   public product: Product;
   public images: String[];
 
@@ -35,12 +33,6 @@ export class ProductPageComponent implements OnInit {
       this.product = null;
       return;
     }
-    
-    this.productService.getCategories().then((result) => {
-      this.categories = result;
-    }, (error) => {
-      this.categories = [];
-    });
 
     this.productService.getProduct(+productId, true).then(
       result => {
@@ -59,7 +51,7 @@ export class ProductPageComponent implements OnInit {
         }
       },
       error => {
-        this.product = null;
+        console.log(error);
       }
     );
   }
