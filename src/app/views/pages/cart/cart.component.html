@@ -1,16 +1,29 @@
-<div id="content">
-    <h1>Thông tin giỏ hàng</h1>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
+        <mat-list>
+            <mat-list-item><h2>Các loại sản phẩm</h2></mat-list-item>
+            <mat-list-item>
+                <button mat-raised-button (click)="loadAllProduct()">Tất cả sản phẩm</button>
+            </mat-list-item>
+            <mat-list-item *ngFor="let category of categories">
+                <button mat-raised-button (click)="setSelectedCategory(category)">{{ category.name }}</button>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content style="padding: 24px; min-height: 300px;">
+        <h1>Thông tin giỏ hàng</h1>
+        
+        <cart-view [emptyText]="headers.empty" [nameHeaderText]="headers.name" [quantityHeaderText]="headers.quantity"
+            [priceHeaderText]="headers.price" [totalHeaderText]="headers.total" [taxFooterText]="footers.tax"
+            [shippingFooterText]="footers.shipping" [totalFooterText]="footers.total" [customEmptyContent]="true">
+            Không có gì trong giỏ hàng cả
+        </cart-view>
     
-    <cart-view [emptyText]="headers.empty" [nameHeaderText]="headers.name" [quantityHeaderText]="headers.quantity"
-        [priceHeaderText]="headers.price" [totalHeaderText]="headers.total" [taxFooterText]="footers.tax"
-        [shippingFooterText]="footers.shipping" [totalFooterText]="footers.total" [customEmptyContent]="true">
-        Không có gì trong giỏ hàng cả
-    </cart-view>
-
-    <div id="cart-buttons">
-        <button mat-raised-button type="button" color="warn" style="margin-right: 4px">Dọn sạch giỏ hàng</button>
-        <cart-checkout [custom]="true">
-            <button mat-raised-button type="button" color="primary">Thanh toán</button>
-        </cart-checkout>
-    </div>
-</div>
+        <div *ngIf="showButtons" id="cart-buttons">
+            <button mat-raised-button type="button" color="warn" style="margin-right: 4px">Dọn sạch giỏ hàng</button>
+            <cart-checkout [custom]="true">
+                <button mat-raised-button type="button" color="primary">Thanh toán</button>
+            </cart-checkout>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
