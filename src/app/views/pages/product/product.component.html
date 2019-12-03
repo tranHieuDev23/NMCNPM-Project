@@ -4,10 +4,10 @@
     </mat-sidenav>
     <mat-sidenav-content style="padding: 24px;">
         <div *ngIf="product" fxLayout="row" style="margin-bottom: 24px">
-            <div fxFlex="30%">
+            <div fxFlex="20%">
                 <img src="{{ product.getImage() }}" class="responsive-img" />
             </div>
-            <div fxFlex="70%" style="padding-left: 24px">
+            <div fxFlex="80%" style="padding-left: 24px">
                 <h2>{{ product.getName() }}</h2>
                 <p>{{ product.getDescriptionDetail() }}</p>
                 <p>{{ product.getPrice() }} VND</p>

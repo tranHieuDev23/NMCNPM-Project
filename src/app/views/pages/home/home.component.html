@@ -4,23 +4,33 @@
     </mat-sidenav>
     <mat-sidenav-content style="padding: 24px;">
         <div *ngIf="selectedProduct" fxLayout="row" style="margin-bottom: 24px">
-            <div fxFlex="30%">
+            <div fxFlex="20%">
                 <img src="{{ selectedProduct.getImage() }}" class="responsive-img" />
             </div>
-            <div fxFlex="70%" style="padding-left: 24px">
+            <div fxFlex="80%" style="padding-left: 24px">
                 <h2>{{ selectedProduct.getName() }}</h2>
                 <p>{{ selectedProduct.getDescriptionDetail() }}</p>
                 <p>{{ selectedProduct.getPrice() }} VND</p>
-                <a mat-raised-button style="margin-right: 4px;" routerLink="/product/{{ selectedProduct.getProductId() }}">Xem thêm</a>
+                <a mat-raised-button style="margin-right: 4px;"
+                    routerLink="/product/{{ selectedProduct.getProductId() }}">Xem thêm</a>
                 <a mat-raised-button (click)='openDialog()'>Mua ngay</a>
             </div>
         </div>
-        <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="center stretch">
-            <div fxFlex="30%" *ngFor="let product of products" class="product-card">
-                <mat-card>
-                    <mat-card-title (click)="setSelectedProduct(product)">{{ product.name }}</mat-card-title>
-                    <mat-card-subtitle>{{ product.description }}</mat-card-subtitle>
-                </mat-card>
+        <div>
+            <mat-paginator #paginator [length]="products.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChanged($event)">
+            </mat-paginator>
+            <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="center stretch">
+                <div *ngFor="let product of shownProducts" fxFlex="30%" class="product-card">
+                    <mat-card>
+                        <mat-card-header>
+                            <img mat-card-avatar class="product-card-image" [src]="product.getImage()" />
+                            <mat-card-title (click)="setSelectedProduct(product)">{{ product.getName() }}
+                            </mat-card-title>
+                            <mat-card-subtitle>{{ product.getDescription() }}</mat-card-subtitle>
+                            <mat-card-subtitle>{{ product.getPrice() }} VND</mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
             </div>
         </div>
     </mat-sidenav-content>

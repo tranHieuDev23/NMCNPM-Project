@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import Product from '../models/product';
-import Category from '../models/category';
-import ProductDetail from '../models/product-detail';
+import { Injectable } from "@angular/core";
+import Product from "../models/product";
+import Category from "../models/category";
+import ProductDetail from "../models/product-detail";
 
 const DETAIL: ProductDetail = new ProductDetail(
   1,
@@ -16,36 +16,268 @@ const DETAIL: ProductDetail = new ProductDetail(
 );
 
 const CATEGORIES: Category[] = [
-  new Category(1, "Laptop", "https://www.mageplaza.com/assets/img/extensions/product-labels.png"),
-  new Category(2, "Smartphone", "https://www.mageplaza.com/assets/img/extensions/product-labels.png"),
-  new Category(3, "Accessory", "https://www.mageplaza.com/assets/img/extensions/product-labels.png")
+  new Category(
+    1,
+    "Laptop",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png"
+  ),
+  new Category(
+    2,
+    "Smartphone",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png"
+  ),
+  new Category(
+    3,
+    "Accessory",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png"
+  )
 ];
 
 const PRODUCTS: Product[] = [
-  new Product(1, "USB", 200, "An USB", "A very cool USB", 
+  new Product(
+    1,
+    "USB",
+    200,
+    "An USB",
+    "A very cool USB",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
-    null, CATEGORIES[2], DETAIL),
-  new Product(2, "Macbook", 20000, "Macbook from Apple", "A very expensive product", 
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    2,
+    "Macbook",
+    20000,
+    "Macbook from Apple",
+    "A very expensive product",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
-    null, CATEGORIES[0], DETAIL),
-  new Product(3, "Dell Laptop", 10000, "Laptop from Dell", "A less expensive product", 
+    null,
+    CATEGORIES[0],
+    DETAIL
+  ),
+  new Product(
+    3,
+    "Dell Laptop",
+    10000,
+    "Laptop from Dell",
+    "A less expensive product",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
-    null, CATEGORIES[0], DETAIL),
-  new Product(4, "Smartphone", 500, "Unspecified smartphone", "Probably manufactured from Vietnam", 
+    null,
+    CATEGORIES[0],
+    DETAIL
+  ),
+  new Product(
+    4,
+    "Smartphone",
+    500,
+    "Unspecified smartphone",
+    "Probably manufactured from Vietnam",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
-    null, CATEGORIES[1], DETAIL),
-  new Product(5, "SD Card", 20, "Store information in a small size", "Usually found in camera", 
+    null,
+    CATEGORIES[1],
+    DETAIL
+  ),
+  new Product(
+    5,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
     "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
-    null, CATEGORIES[2], DETAIL),
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    6,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    7,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    8,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    9,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    10,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    11,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    12,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    13,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    14,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    15,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    16,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    17,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    18,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    19,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  ),
+  new Product(
+    20,
+    "SD Card",
+    20,
+    "Store information in a small size",
+    "Usually found in camera",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    "https://www.mageplaza.com/assets/img/extensions/product-labels.png",
+    null,
+    CATEGORIES[2],
+    DETAIL
+  )
 ];
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ProductRetrieverService {
   public getCategories(): Promise<Category[]> {
@@ -56,7 +288,7 @@ export class ProductRetrieverService {
 
   public getCategory(categoryId: number): Promise<Category> {
     return new Promise((resolve, reject) => {
-      for(let i = 0; i < CATEGORIES.length; i ++) {
+      for (let i = 0; i < CATEGORIES.length; i++) {
         if (CATEGORIES[i].getCategoryId() == categoryId) {
           resolve(CATEGORIES[i]);
           return;
@@ -72,7 +304,10 @@ export class ProductRetrieverService {
     });
   }
 
-  public getProductsOfCategory(category: Category, withDetail: boolean = false): Promise<Product[]> {
+  public getProductsOfCategory(
+    category: Category,
+    withDetail: boolean = false
+  ): Promise<Product[]> {
     return new Promise((resolve, reject) => {
       const result: Product[] = [];
       PRODUCTS.forEach(element => {
@@ -83,9 +318,12 @@ export class ProductRetrieverService {
     });
   }
 
-  public getProduct(productId: number, withDetail: boolean = false): Promise<Product> {
+  public getProduct(
+    productId: number,
+    withDetail: boolean = false
+  ): Promise<Product> {
     return new Promise((resolve, reject) => {
-      for (let i = 0; i < PRODUCTS.length; i ++) {
+      for (let i = 0; i < PRODUCTS.length; i++) {
         if (PRODUCTS[i].getProductId() == productId) {
           resolve(PRODUCTS[i]);
           return;

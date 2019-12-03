@@ -3,6 +3,7 @@ import { CartService } from 'ng-shopping-cart';
 import ProductCartItem from 'src/app/models/cart-item';
 import Category from 'src/app/models/category';
 import { ProductRetrieverService } from 'src/app/controllers/product-retriever.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -29,7 +30,8 @@ export class CartPageComponent implements OnInit {
 
   constructor(
     private cartService: CartService<ProductCartItem>,
-    private productService: ProductRetrieverService 
+    private productService: ProductRetrieverService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -50,5 +52,14 @@ export class CartPageComponent implements OnInit {
 
   update() {
     this.showButtons = (this.cartService.getItems().length > 0);
+  }
+
+  onClearCart() {
+    this.cartService.clear();
+    this.router.navigateByUrl("/");
+  }
+
+  onConfirmPurchase() {
+
   }
 }

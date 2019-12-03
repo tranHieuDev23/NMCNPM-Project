@@ -12,7 +12,7 @@
         </cart-view>
     
         <div *ngIf="showButtons" id="cart-buttons">
-            <button mat-raised-button type="button" color="warn" style="margin-right: 4px">Dọn sạch giỏ hàng</button>
+            <button mat-raised-button type="button" color="warn" style="margin-right: 4px" (click)="onClearCart()">Dọn sạch giỏ hàng</button>
             <cart-checkout [custom]="true">
                 <button mat-raised-button type="button" color="primary">Thanh toán</button>
             </cart-checkout>
