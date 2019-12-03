@@ -27,6 +27,10 @@ import { MatBadgeModule } from "@angular/material/badge";
 import { MatMenuModule } from "@angular/material/menu";
 import { SidebarComponent } from "./views/elements/sidebar/sidebar.component";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { ConfirmationPopupComponent } from "./views/elements/confirmation-popup/confirmation-popup.component";
+import { MatSelectModule } from "@angular/material/select";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -38,7 +42,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     SafeHtmlPipe,
     OrderPopupComponent,
     CartPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    ConfirmationPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -59,10 +64,13 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     MatDialogModule,
     MatBadgeModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [OrderPopupComponent]
+  entryComponents: [OrderPopupComponent, ConfirmationPopupComponent]
 })
 export class AppModule {}
