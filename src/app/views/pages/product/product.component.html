@@ -20,7 +20,7 @@
             <h3>Phụ kiện</h3>
             <div id="information" [innerHtml]="product.getDetail().getAccessories() | safeHtml"></div>
             <h3>Chính sách bảo hành</h3>
-            <div id="information" [innerHtml]="product.getDetail().getGuaranty() | safeHtml"></div>
+            <div id="information" [innerHtml]="product.getDetail().getGuaranty() | safeHtml"  style="margin-bottom: 24px;"></div>
             <angular-image-slider [images]="images"></angular-image-slider>
         </div>
     </mat-sidenav-content>
