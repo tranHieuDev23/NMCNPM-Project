@@ -17,20 +17,19 @@
             </div>
         </div>
         <div>
-            <mat-paginator #paginator [length]="products.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageChanged($event)">
+            <mat-paginator #paginator [length]="products.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPageChanged($event)">
             </mat-paginator>
             <div fxLayout="row wrap" fxLayoutGap="8px" fxLayoutAlign="center stretch">
-                <div *ngFor="let product of shownProducts" fxFlex="30%" class="product-card">
-                    <mat-card>
-                        <mat-card-header>
-                            <img mat-card-avatar class="product-card-image" [src]="product.getImage()" />
-                            <mat-card-title (click)="setSelectedProduct(product)">{{ product.getName() }}
-                            </mat-card-title>
-                            <mat-card-subtitle>{{ product.getDescription() }}</mat-card-subtitle>
-                            <mat-card-subtitle>{{ product.getPrice() }} VND</mat-card-subtitle>
-                        </mat-card-header>
-                    </mat-card>
-                </div>
+                <mat-card *ngFor="let product of shownProducts" fxFlex="30%" class="product-card">
+                    <mat-card-header>
+                        <img mat-card-avatar class="product-card-image" [src]="product.getImage()" />
+                        <mat-card-title (click)="setSelectedProduct(product)">{{ product.getName() }}
+                        </mat-card-title>
+                        <mat-card-subtitle>{{ product.getDescription() }}</mat-card-subtitle>
+                        <mat-card-subtitle>{{ product.getPrice() }} VND</mat-card-subtitle>
+                    </mat-card-header>
+                </mat-card>
             </div>
         </div>
     </mat-sidenav-content>
