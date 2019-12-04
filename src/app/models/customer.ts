@@ -14,6 +14,19 @@ class Customer {
     public getPhone(): string { return this.phone; }
     public getAddress(): string { return this.address; }
     public getCityRegion(): string { return this.cityRegion; }
+
+    static fromJSON(data: any): Customer {
+        if (data == null || data == undefined)
+            return null;
+        return new Customer(
+            data.customerId,
+            data.name,
+            data.email,
+            data.phone,
+            data.address,
+            data.cityRegion
+        );
+    }
 }
 
 export default Customer;

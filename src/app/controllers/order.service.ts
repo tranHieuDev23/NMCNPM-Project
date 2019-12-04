@@ -1,9 +1,7 @@
 import { Injectable } from "@angular/core";
 import Order from "../models/order";
 import { HttpClient } from "@angular/common/http";
-
-const ADD_ORDER_API = "/api/add-order";
-const RETRIEVE_ORDERS_API = "/api/retrieve-orders";
+import { APIS } from "../configs/api-endpoints";
 
 @Injectable({
   providedIn: "root"
@@ -11,15 +9,31 @@ const RETRIEVE_ORDERS_API = "/api/retrieve-orders";
 export class OrderService {
   constructor(private http: HttpClient) {}
 
-  public addOrder(order: Order): Promise<any> {
+  public addOrder(order: Order): Promise<Object> {
     return this.http
-      .post(ADD_ORDER_API, {
-        order: order
+      .post(APIS.ADD_ORDER_API, {
+        order
       })
       .toPromise();
   }
 
   public retrieveOrders(): Promise<Order[]> {
-    return this.http.post<Order[]>(RETRIEVE_ORDERS_API, {}).toPromise();
+    return new Promise((resolve, reject) => {
+      this.http
+        .post<any[]>(APIS.RETRIEVE_ORDERS_API, {})
+        .toPromise()
+        .then(
+          result => {
+            const orders: Order[] = [];
+            result.forEach(element => {
+              orders.push(Order.fromJSON(element));
+            });
+            resolve(orders);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
   }
 }

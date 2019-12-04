@@ -1,6 +1,5 @@
 import { CartItem } from "ng-shopping-cart";
 import Product from './product';
-import Category from './category';
 
 class ProductCartItem extends CartItem {
 
@@ -24,13 +23,15 @@ class ProductCartItem extends CartItem {
         );
     }
 
-    static fromJSON(itemData: any): ProductCartItem {
+    static fromJSON(data: any): ProductCartItem {
+        if (data == null || data == undefined)
+            return null;
         return new ProductCartItem(
-            itemData.productId,
-            itemData.productName,
-            itemData.productPrice,
-            itemData.productImage,
-            itemData.quantity
+            data.productId,
+            data.productName,
+            data.productPrice,
+            data.productImage,
+            data.quantity
         );
     }
 

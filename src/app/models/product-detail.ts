@@ -20,6 +20,22 @@ class ProductDetail {
     public getImage5(): string { return this.image5; }
     public getAccessories(): string { return this.accessories; }
     public getGuaranty(): string { return this.guaranty; }
+
+    static fromJSON(data: any): ProductDetail {
+        if (data == null || data == undefined)
+            return null;
+        return new ProductDetail(
+            data.productId,
+            data.information,
+            data.image1,
+            data.image2,
+            data.image3,
+            data.image4,
+            data.image5,
+            data.accessories,
+            data.guaranty
+        );
+    }
 }
 
 export default ProductDetail;

@@ -107,11 +107,16 @@ export class ConfirmationPopupComponent implements OnInit {
     this.orderService.addOrder(order).then(
       result => {
         this.dialogRef.close(true);
-        this.snackbar.open("Đơn hàng đã được tạo thành công! Chúng tôi sẽ sớm liên lạc lại với bạn");
+        this.snackbar.open("Đơn hàng đã được tạo thành công! Chúng tôi sẽ sớm liên lạc lại với bạn", null, {
+          duration: 3000
+        });
       },
       error => {
         this.dialogRef.close(false);
-        this.snackbar.open("Có lỗi xảy ra trong quá trình tạo đơn hàng!");
+        console.log(error);
+        this.snackbar.open("Có lỗi xảy ra trong quá trình tạo đơn hàng!", null, {
+          duration: 3000
+        });
       }
     );
   }
