@@ -7,7 +7,6 @@ class Product {
         public name: string,
         public price: number,
         public description: string,
-        public descriptionDetail: string,
         public image: string,
         public thumbImage: string,
         public lastUpdate: Date,
@@ -19,7 +18,6 @@ class Product {
     public getName(): string { return this.name; }
     public getPrice(): number { return this.price; }
     public getDescription(): string { return this.description; }
-    public getDescriptionDetail(): string { return this.descriptionDetail; }
     public getImage(): string { return this.image; }
     public getThumbImage(): string { return this.thumbImage; }
     public getLastUpdate(): Date { return this.lastUpdate; }
@@ -34,7 +32,6 @@ class Product {
             data.name,
             data.price,
             data.description,
-            data.descriptionDetail,
             data.image,
             data.thumbImage,
             data.lastUpdate,
