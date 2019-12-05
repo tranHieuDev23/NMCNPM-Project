@@ -33,6 +33,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CookieService } from "ngx-cookie-service";
+import { LoginPageComponent } from './views/pages/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { CookieService } from "ngx-cookie-service";
     OrderPopupComponent,
     CartPageComponent,
     SidebarComponent,
-    ConfirmationPopupComponent
+    ConfirmationPopupComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { CookieService } from "ngx-cookie-service";
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule
   ],
   providers: [
     CookieService
