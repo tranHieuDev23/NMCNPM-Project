@@ -39,6 +39,7 @@ import { AdminPageComponent } from './views/pages/admin/admin.component';
 import { MatTableModule } from '@angular/material/table';
 import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
 import { AddUserPopupComponent } from './views/elements/add-user-popup/add-user-popup.component';
+import { YesNoPopupComponent } from './views/elements/yes-no-popup/yes-no-popup.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AddUserPopupComponent } from './views/elements/add-user-popup/add-user-
     LoginPageComponent,
     AdminPageComponent,
     ProductManagementPageComponent,
-    AddUserPopupComponent
+    AddUserPopupComponent,
+    YesNoPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +90,6 @@ import { AddUserPopupComponent } from './views/elements/add-user-popup/add-user-
     CookieService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [OrderPopupComponent, ConfirmationPopupComponent, AddUserPopupComponent]
+  entryComponents: [OrderPopupComponent, ConfirmationPopupComponent, AddUserPopupComponent, YesNoPopupComponent]
 })
 export class AppModule {}
