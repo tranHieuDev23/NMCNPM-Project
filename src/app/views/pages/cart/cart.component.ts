@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CartService } from "ng-shopping-cart";
 import ProductCartItem from "src/app/models/cart-item";
 import Category from "src/app/models/category";
-import { ProductRetrieverService } from "src/app/controllers/product-retriever.service";
+import { ProductService } from "src/app/controllers/product.service";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationPopupComponent } from "../../elements/confirmation-popup/confirmation-popup.component";
@@ -32,7 +32,7 @@ export class CartPageComponent implements OnInit {
 
   constructor(
     private cartService: CartService<ProductCartItem>,
-    private productService: ProductRetrieverService,
+    private productService: ProductService,
     private dialog: MatDialog,
     private router: Router
   ) {}

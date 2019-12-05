@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ProductRetrieverService } from "src/app/controllers/product-retriever.service";
+import { ProductService } from "src/app/controllers/product.service";
 import Product from "src/app/models/product";
 import Category from "src/app/models/category";
 import { MatDialog } from "@angular/material/dialog";
@@ -20,7 +20,7 @@ export class HomePageComponent implements OnInit {
   public selectedCategory: Category = null;
 
   constructor(
-    private productService: ProductRetrieverService,
+    private productService: ProductService,
     private dialog: MatDialog,
     private route: ActivatedRoute
   ) {}

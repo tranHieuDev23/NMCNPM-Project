@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import Product from "src/app/models/product";
-import { ProductRetrieverService } from "src/app/controllers/product-retriever.service";
+import { ProductService } from "src/app/controllers/product.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { OrderPopupComponent } from '../../elements/order-popup/order-popup.component';
@@ -16,7 +16,7 @@ export class ProductPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductRetrieverService,
+    private productService: ProductService,
     private dialog: MatDialog
   ) {}
 

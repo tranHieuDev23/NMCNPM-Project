@@ -7,7 +7,7 @@ import { APIS } from "../configs/api-endpoints";
 @Injectable({
   providedIn: "root"
 })
-export class ProductRetrieverService {
+export class ProductService {
   constructor(private http: HttpClient) {}
 
   public getCategories(): Promise<Category[]> {

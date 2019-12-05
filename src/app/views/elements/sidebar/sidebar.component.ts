@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Category from 'src/app/models/category';
-import { ProductRetrieverService } from 'src/app/controllers/product-retriever.service';
+import { ProductService } from 'src/app/controllers/product.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
   public categories: Category[];
 
   constructor(
-    private productService: ProductRetrieverService
+    private productService: ProductService
   ) { }
 
   ngOnInit() {

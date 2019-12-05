@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'ng-shopping-cart';
 import ProductCartItem from 'src/app/models/cart-item';
-import { ProductRetrieverService } from 'src/app/controllers/product-retriever.service';
+import { ProductService } from 'src/app/controllers/product.service';
 import Category from 'src/app/models/category';
 
 @Component({
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private cartService: CartService<ProductCartItem>,
-    private productService: ProductRetrieverService
+    private productService: ProductService
   ) { }
 
   ngOnInit() {
