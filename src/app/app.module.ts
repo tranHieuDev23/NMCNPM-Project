@@ -37,6 +37,7 @@ import { LoginPageComponent } from './views/pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AdminPageComponent } from './views/pages/admin/admin.component';
 import { MatTableModule } from '@angular/material/table';
+import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatTableModule } from '@angular/material/table';
     SidebarComponent,
     ConfirmationPopupComponent,
     LoginPageComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    ProductManagementPageComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { ProductPageComponent } from "./views/pages/product/product.component";
 import { CartPageComponent } from "./views/pages/cart/cart.component";
 import { LoginPageComponent } from "./views/pages/login/login.component";
 import { AdminPageComponent } from "./views/pages/admin/admin.component";
+import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
 
 const appRoutes: Routes = [
   { path: "product/:product-id", component: ProductPageComponent },
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
     path: "admin",
     children: [
       { path: "admins", component: AdminPageComponent },
+      { path: "products", component: ProductManagementPageComponent },
       { path: "**", redirectTo: "admins" }
     ]
   },

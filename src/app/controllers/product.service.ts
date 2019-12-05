@@ -51,7 +51,7 @@ export class ProductService {
     });
   }
 
-  public getProducts(withDetail: boolean = false): Promise<Product[]> {
+  public getAllProduct(withDetail: boolean = false): Promise<Product[]> {
     return new Promise((resolve, reject) => {
       this.http
         .post<any[]>(APIS.RETRIEVE_PRODUCTS_API, { withDetail })

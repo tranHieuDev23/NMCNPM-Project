@@ -34,7 +34,7 @@ export class HomePageComponent implements OnInit {
   public initialize(params: ParamMap): void {
     const categoryId = params.get("category-id");
     if (categoryId == null) {
-      this.productService.getProducts().then(
+      this.productService.getAllProduct().then(
         result => {
           this.products = result;
           this.setShownProducts(0, this.paginator.pageSize);

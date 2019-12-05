@@ -1,0 +1,61 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
+        <mat-list>
+            <mat-list-item>
+                <h2>Quản lý sản phẩm</h2>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-raised-button>Danh sách tất cả các sản phẩm</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-raised-button>Thêm sản phẩm mới</button>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="content" style="padding: 24px;">
+        <h2>Danh sách sản phẩm</h2>
+        
+        <table mat-table [dataSource]="shownProducts">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Tên sản phẩm </th>
+                <td mat-cell *matCellDef="let product"> {{product.getName()}} </td>
+            </ng-container>
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef> Loại </th>
+                <td mat-cell *matCellDef="let product"> {{product.getCategory().getName()}} </td>
+            </ng-container>
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Giá </th>
+                <td mat-cell *matCellDef="let product"> {{product.getPrice()}} </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Mô tả </th>
+                <td mat-cell *matCellDef="let product"> {{product.getDescription()}} </td>
+            </ng-container>
+            <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef> Ảnh </th>
+                <td mat-cell *matCellDef="let product">
+                    <img class="product-image" [src]="product.getImage()" />
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="lastUpdate">
+                <th mat-header-cell *matHeaderCellDef> Lần cuối cập nhật </th>
+                <td mat-cell *matCellDef="let product"> {{product.getLastUpdate()}} </td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Tùy chọn </th>
+                <td mat-cell *matCellDef="let product">
+                    <button mat-stroked-button color="primary" style="margin-right: 4px; margin-bottom: 4px;">Chỉnh
+                        sửa</button>
+                    <button mat-stroked-button color="warn">Xóa</button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+        </table>
+
+        <mat-paginator #paginator [length]="products.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPageChanged($event)">
+        </mat-paginator>
+    </mat-sidenav-content>
+</mat-sidenav-container>
