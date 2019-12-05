@@ -6,6 +6,7 @@ import { CartPageComponent } from "./views/pages/cart/cart.component";
 import { LoginPageComponent } from "./views/pages/login/login.component";
 import { AdminPageComponent } from "./views/pages/admin/admin.component";
 import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
+import { UserService } from './controllers/user.service';
 
 const appRoutes: Routes = [
   { path: "product/:product-id", component: ProductPageComponent },
@@ -14,13 +15,14 @@ const appRoutes: Routes = [
   { path: "login", component: LoginPageComponent },
   {
     path: "admin",
+    canActivate: [UserService],
     children: [
       { path: "admins", component: AdminPageComponent },
       { path: "products", component: ProductManagementPageComponent },
       { path: "**", redirectTo: "admins" }
     ]
   },
-  { path: "", component: HomePageComponent }
+  { path: "**", component: HomePageComponent }
 ];
 
 @NgModule({
