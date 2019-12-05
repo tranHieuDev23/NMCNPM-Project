@@ -8,25 +8,38 @@ import { APIS } from "../configs/api-endpoints";
   providedIn: "root"
 })
 export class ProductService {
+  private categories: Category[] = null;
+
   constructor(private http: HttpClient) {}
 
-  public getCategories(): Promise<Category[]> {
+  private initCategories(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.http
         .post<any[]>(APIS.RETRIEVE_CATEGORIES_API, {})
         .toPromise()
         .then(
           result => {
-            const categories: Category[] = [];
+            const deserialized: Category[] = [];
             result.forEach(element => {
-              categories.push(Category.fromJSON(element));
+              deserialized.push(Category.fromJSON(element));
             });
-            resolve(categories);
+            this.categories = deserialized;
+            resolve();
           },
           error => {
             reject(error);
           }
         );
+    });
+  }
+
+  public getCategories(): Promise<Category[]> {
+    return new Promise((resolve, reject) => {
+      if (this.categories == null) {
+        this.initCategories().then(() => {
+          resolve(this.categories);
+        }, reject);
+      } else resolve(this.categories);
     });
   }
 
