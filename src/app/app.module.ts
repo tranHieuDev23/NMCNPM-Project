@@ -38,6 +38,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminPageComponent } from './views/pages/admin/admin.component';
 import { MatTableModule } from '@angular/material/table';
 import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
+import { AddUserPopupComponent } from './views/elements/add-user-popup/add-user-popup.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ProductManagementPageComponent } from './views/pages/product-management
     ConfirmationPopupComponent,
     LoginPageComponent,
     AdminPageComponent,
-    ProductManagementPageComponent
+    ProductManagementPageComponent,
+    AddUserPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +88,6 @@ import { ProductManagementPageComponent } from './views/pages/product-management
     CookieService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [OrderPopupComponent, ConfirmationPopupComponent]
+  entryComponents: [OrderPopupComponent, ConfirmationPopupComponent, AddUserPopupComponent]
 })
 export class AppModule {}

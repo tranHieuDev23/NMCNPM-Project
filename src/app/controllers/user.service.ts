@@ -100,7 +100,7 @@ export class UserService {
     });
   }
 
-  addUser(admin: Admin): Promise<Admin> {
+  addUser(admin: Admin, password: string): Promise<Admin> {
     return new Promise((resolve, reject) => {
       const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
       if (!accessToken) {
@@ -108,7 +108,7 @@ export class UserService {
         return;
       }
       this.http
-        .post<Admin>(APIS.ADD_USER, { admin, accessToken })
+        .post<Admin>(APIS.ADD_USER, { admin, password, accessToken })
         .toPromise()
         .then(
           result => {

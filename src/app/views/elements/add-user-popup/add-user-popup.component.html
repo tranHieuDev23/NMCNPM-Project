@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>
+    Điền thông tin để tạo quản trị viên mới
+</h1>
+<mat-dialog-content fxLayout="column" class="form">
+    <mat-form-field>
+        <input matInput placeholder="Username" [(ngModel)]="username">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="password" placeholder="Mật khẩu" [(ngModel)]="password">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="email" placeholder="Email" [(ngModel)]="email">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="tel" placeholder="Số điện thoại" [(ngModel)]="phone">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="onCreateAdmin()">Hoàn tất</button>
+</mat-dialog-actions>

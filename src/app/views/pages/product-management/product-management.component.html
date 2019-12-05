@@ -2,19 +2,19 @@
     <mat-sidenav mode="side" opened>
         <mat-list>
             <mat-list-item>
-                <h2>Quản lý sản phẩm</h2>
+                <h2>Tùy chọn quản trị viên</h2>
             </mat-list-item>
             <mat-list-item>
-                <button mat-raised-button>Danh sách tất cả các sản phẩm</button>
+                <button mat-raised-button routerLink="/admin/admins">Quản lý quản trị viên</button>
             </mat-list-item>
             <mat-list-item>
-                <button mat-raised-button>Thêm sản phẩm mới</button>
+                <button mat-raised-button routerLink="/admin/products">Quản lý sản phẩm</button>
             </mat-list-item>
         </mat-list>
     </mat-sidenav>
     <mat-sidenav-content class="content" style="padding: 24px;">
         <h2>Danh sách sản phẩm</h2>
-        
+
         <table mat-table [dataSource]="shownProducts">
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Tên sản phẩm </th>
