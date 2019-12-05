@@ -9,5 +9,13 @@
     <a mat-button color="white" [matBadgeHidden]="numberOfItems == 0" [matBadge]="numberOfItems"
         matBadgePosition="after" matBadgeColor="warn" routerLink="/cart" matBadgeSize="small">Giỏ hàng</a>
     <span class="fill-remaining-space"></span>
-    <a mat-button color="white" routerLink="/login">Đăng nhập</a>
+    <a *ngIf="admin == null" mat-button color="white" routerLink="/login">Đăng nhập</a>
+    <span *ngIf="admin">
+        <a mat-button [matMenuTriggerFor]="adminMenu" color="white">{{ admin.getUsername() }}</a>
+        <mat-menu #adminMenu="matMenu">
+            <button mat-menu-item (click)="onLogout()">
+                Đăng xuất
+            </button>
+        </mat-menu>
+    </span>
 </mat-toolbar>

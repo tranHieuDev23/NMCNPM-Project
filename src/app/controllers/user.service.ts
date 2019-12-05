@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import Admin from "../models/admin";
 import { CookieService } from "ngx-cookie-service";
 import { APIS } from "../configs/api-endpoints";
+import { EventEmitter } from 'events';
+import { BehaviorSubject } from 'rxjs';
 
 const ACCESS_TOKEN_COOKIE = "accessToken";
 
@@ -10,7 +12,15 @@ const ACCESS_TOKEN_COOKIE = "accessToken";
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient, private cookie: CookieService) {}
+  public currentUser: BehaviorSubject<Admin> = new BehaviorSubject<Admin>(null);
+
+  constructor(private http: HttpClient, private cookie: CookieService) {
+    this.getLoggedInUser().then((result) => {
+      this.currentUser.next(result);
+    }, (error) => { 
+      console.log(error);
+    });
+  }
 
   login(username: string, password: string): Promise<Admin> {
     return new Promise((resolve, reject) => {
@@ -21,6 +31,7 @@ export class UserService {
             const admin = Admin.fromJSON(result.admin);
             const accessToken = result.accessToken;
             this.cookie.set(ACCESS_TOKEN_COOKIE, accessToken);
+            this.currentUser.next(admin);
             resolve(admin);
           },
           error => {
@@ -41,9 +52,11 @@ export class UserService {
       this.http.post(APIS.LOGOUT, { accessToken }).subscribe(
         () => {
           resolve(true);
+          this.currentUser.next(null);
         },
         () => {
           resolve(false);
+          this.currentUser.next(null);
         }
       );
     });
