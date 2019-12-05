@@ -32,6 +32,7 @@ import { ConfirmationPopupComponent } from "./views/elements/confirmation-popup/
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { CookieService } from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -71,7 +72,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatInputModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [OrderPopupComponent, ConfirmationPopupComponent]
 })

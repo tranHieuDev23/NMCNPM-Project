@@ -37,7 +37,12 @@ export class ProductRetrieverService {
         .toPromise()
         .then(
           result => {
-            resolve(Category.fromJSON(result));
+            const category = Category.fromJSON(result);
+            if (category) {
+              resolve(category);
+            } else {
+              reject("Error while deserialize response!");
+            }
           },
           error => {
             reject(error);
@@ -99,7 +104,12 @@ export class ProductRetrieverService {
         .toPromise()
         .then(
           result => {
-            resolve(Product.fromJSON(result));
+            const product = Product.fromJSON(result);
+            if (product) {
+              resolve(product);
+            } else {
+              reject("Error while deserialize response!");
+            }
           },
           error => {
             reject(error);

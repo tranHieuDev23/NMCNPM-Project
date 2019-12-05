@@ -4,5 +4,8 @@ export const APIS = {
   RETRIEVE_PRODUCTS_API: "/api/retrieve-products",
   RETRIEVE_PRODUCT_API: "/api/retrieve-product",
   ADD_ORDER_API: "/api/add-order",
-  RETRIEVE_ORDERS_API: "/api/retrieve-orders"
+  RETRIEVE_ORDERS_API: "/api/retrieve-orders",
+  RETRIEVE_USER: "/api/retrieve-user",
+  LOGIN: "/api/login",
+  LOGOUT: "/api/logout"
 };
