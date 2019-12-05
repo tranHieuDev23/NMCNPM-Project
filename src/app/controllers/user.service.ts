@@ -3,21 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import Admin from "../models/admin";
 import { CookieService } from "ngx-cookie-service";
 import { APIS } from "../configs/api-endpoints";
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router
-} from "@angular/router";
 
 const ACCESS_TOKEN_COOKIE = "accessToken";
 
 @Injectable({
   providedIn: "root"
 })
-export class UserService implements CanActivate {
-  constructor(private http: HttpClient, private cookie: CookieService, private router: Router) {}
+export class UserService {
+  constructor(private http: HttpClient, private cookie: CookieService) {}
 
   login(username: string, password: string): Promise<Admin> {
     return new Promise((resolve, reject) => {
@@ -79,20 +72,6 @@ export class UserService implements CanActivate {
       } else {
         reject("No access token found!");
       }
-    });
-  }
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Promise<boolean | UrlTree> {
-    return new Promise<boolean | UrlTree>((resolve) => {
-      this.getLoggedInUser().then(result => {
-        resolve(true);
-      }, (error) => {
-        console.log(error);
-        resolve(this.router.parseUrl('/'));
-      });
     });
   }
 
