@@ -35,6 +35,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CookieService } from "ngx-cookie-service";
 import { LoginPageComponent } from './views/pages/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { AdminPageComponent } from './views/pages/admin/admin.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { FormsModule } from '@angular/forms';
     CartPageComponent,
     SidebarComponent,
     ConfirmationPopupComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatInputModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatTableModule
   ],
   providers: [
     CookieService

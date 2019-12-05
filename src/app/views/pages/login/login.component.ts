@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AuthenticationService } from "src/app/controllers/authentication.service";
+import { UserService } from "src/app/controllers/user.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,12 +12,12 @@ export class LoginPageComponent {
   public password: string = "";
 
   constructor(
-    private authService: AuthenticationService,
+    private userService: UserService,
     private router: Router
   ) {}
 
   onLogin(): void {
-    this.authService.login(this.username.trim(), this.password).then(
+    this.userService.login(this.username.trim(), this.password).then(
       result => {
         this.router.navigateByUrl("/admin");
       },
