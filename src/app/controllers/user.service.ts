@@ -75,6 +75,17 @@ export class UserService {
     });
   }
 
+  isUserLoggedIn(): Promise<boolean> {
+    return new Promise<boolean>((resolve) => {
+      this.getLoggedInUser().then((result) => {
+        resolve(result != null);
+      }, (error) => {
+        console.log(error);
+        resolve(false);
+      });
+    });
+  }
+
   getAllUSer(): Promise<Admin[]> {
     return new Promise((resolve, reject) => {
       const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);

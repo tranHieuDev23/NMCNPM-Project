@@ -18,15 +18,12 @@ export class RouteLogoutGuardService {
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
     return new Promise<boolean | UrlTree>((resolve, reject) => {
-      this.userService.getLoggedInUser().then(
-        () => {
+      this.userService.isUserLoggedIn().then(result => {
+        if (result) {
           console.log("User is logged in!");
           resolve(this.router.parseUrl("/admin"));
-        },
-        error => {
-          resolve(true);
-        }
-      );
+        } else resolve(true);
+      });
     });
   }
 }

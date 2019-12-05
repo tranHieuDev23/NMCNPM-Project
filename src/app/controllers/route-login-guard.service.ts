@@ -19,15 +19,12 @@ export class RouteLoginGuardService implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
     return new Promise<boolean | UrlTree>((resolve, reject) => {
-      this.userService.getLoggedInUser().then(
-        () => {
-          resolve(true);
-        },
-        error => {
-          console.log(error);
+      this.userService.isUserLoggedIn().then(result => {
+        if (!result) {
+          console.log("No user is logged in!");
           resolve(this.router.parseUrl("/"));
-        }
-      );
+        } else resolve(true);
+      });
     });
   }
 }
