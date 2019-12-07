@@ -28,7 +28,6 @@ import { MatMenuModule } from "@angular/material/menu";
 import { SidebarComponent } from "./views/elements/sidebar/sidebar.component";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { ConfirmationPopupComponent } from "./views/elements/confirmation-popup/confirmation-popup.component";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
@@ -38,7 +37,6 @@ import { FormsModule } from '@angular/forms';
 import { AdminPageComponent } from './views/pages/admin/admin.component';
 import { MatTableModule } from '@angular/material/table';
 import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
-import { AddUserPopupComponent } from './views/elements/add-user-popup/add-user-popup.component';
 import { YesNoPopupComponent } from './views/elements/yes-no-popup/yes-no-popup.component';
 import { AdminSidebarComponent } from './views/elements/admin-sidebar/admin-sidebar.component';
 import { CategoryManagementComponent } from './views/pages/category-management/category-management.component';
@@ -56,11 +54,9 @@ import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.co
     OrderPopupComponent,
     CartPageComponent,
     SidebarComponent,
-    ConfirmationPopupComponent,
     LoginPageComponent,
     AdminPageComponent,
     ProductManagementPageComponent,
-    AddUserPopupComponent,
     YesNoPopupComponent,
     AdminSidebarComponent,
     CategoryManagementComponent,
@@ -98,6 +94,6 @@ import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.co
     CookieService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [OrderPopupComponent, ConfirmationPopupComponent, AddUserPopupComponent, YesNoPopupComponent]
+  entryComponents: [OrderPopupComponent, YesNoPopupComponent, FormDialogComponent]
 })
 export class AppModule {}

@@ -19,7 +19,7 @@ export class LoginPageComponent {
   onLogin(): void {
     this.userService.login(this.username.trim(), this.password).then(
       result => {
-        this.router.navigateByUrl("/admin");
+        this.router.navigateByUrl("/admin/admins");
       },
       error => {
         console.log(error);

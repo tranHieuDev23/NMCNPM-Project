@@ -1,1 +1,19 @@
-<p>form-dialog works!</p>
+<h2 *ngIf="title" mat-dialog-title>
+    {{ title }}
+</h2>
+<mat-dialog-content *ngIf="items" fxLayout="column" class="form">
+    <mat-form-field *ngFor="let item of items">
+        <input *ngIf="item.controlType == 'input'" matInput [placeholder]="item.placeholder" [type]="item.type? item.type : 'text'" [(ngModel)]="item.value">
+        <textarea *ngIf="item.controlType == 'textarea'" matInput [placeholder]="item.placeholder"
+            [(ngModel)]="item.value"></textarea>
+        <mat-select *ngIf="item.controlType == 'select'" [placeholder]="item.placeholder" [(ngModel)]="item.value">
+            <mat-option *ngFor="let option of item.options" [value]="option">
+                {{ option }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="onCompleted()">{{ completedText }}</button>
+    <button mat-stroked-button color="primary" (click)="onCancel()">{{ cancelText }}</button>
+</mat-dialog-actions>

@@ -2,9 +2,12 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import Admin from "src/app/models/admin";
 import { UserService } from "src/app/controllers/user.service";
 import { MatDialog } from "@angular/material/dialog";
-import { AddUserPopupComponent } from "../../elements/add-user-popup/add-user-popup.component";
 import { MatTable } from "@angular/material/table";
 import { YesNoPopupComponent } from "../../elements/yes-no-popup/yes-no-popup.component";
+import {
+  FormDialogComponent,
+  FormControlItem
+} from "../../elements/form-dialog/form-dialog.component";
 
 @Component({
   selector: "app-admin",
@@ -30,11 +33,30 @@ export class AdminPageComponent implements OnInit {
   }
 
   onCreateAdmin(): void {
-    const dialogRef = this.dialog.open(AddUserPopupComponent);
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      width: "600px",
+      data: {
+        name: "Điền thông tin để tạo quản trị viên mới",
+        items: [
+          new FormControlItem("input", "Username", "text", "username"),
+          new FormControlItem("input", "Mật khẩu", "password", "password"),
+          new FormControlItem("input", "Email", "email", "email"),
+          new FormControlItem("input", "Số điện thoại", "tel", "phone")
+        ],
+        completedText: "Hoàn tất",
+        cancelText: "Hủy bỏ"
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.admins.push(result);
-        this.table.renderRows();
+        this.userService
+          .addUser(Admin.fromJSON(result), result.password)
+          .then(admin => {
+            this.admins.push(admin);
+            this.table.renderRows();
+          }, error => {
+            console.log(error);
+          });
       }
     });
   }
@@ -44,10 +66,9 @@ export class AdminPageComponent implements OnInit {
       .open(YesNoPopupComponent)
       .afterClosed()
       .subscribe(result => {
-        if (!result)
-          return;
+        if (!result) return;
         this.userService.removeUser(admin).then(
-          result => {
+          () => {
             this.admins = this.admins.filter(value => {
               return value.getAdminId() != admin.getAdminId();
             });
