@@ -36,7 +36,7 @@ export class AdminPageComponent implements OnInit {
     const dialogRef = this.dialog.open(FormDialogComponent, {
       width: "600px",
       data: {
-        name: "Điền thông tin để tạo quản trị viên mới",
+        title: "Điền thông tin để tạo quản trị viên mới",
         items: [
           new FormControlItem("input", "Username", "text", "username"),
           new FormControlItem("input", "Mật khẩu", "password", "password"),

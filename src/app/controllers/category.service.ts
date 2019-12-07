@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import Category from "../models/category";
 import { APIS } from "../configs/api-endpoints";
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,7 @@ export class CategoryService {
   public onCategoriesChanged: EventEmitter<void> = new EventEmitter<void>();
   private categories: Category[] = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   private initCategories(): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -66,7 +67,8 @@ export class CategoryService {
 
   public addCategory(category: Category): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.http.post(APIS.ADD_CATEGORY_API, { category }).subscribe(() => {
+      const accessToken = this.userService.getAccessToken();
+      this.http.post(APIS.ADD_CATEGORY_API, { accessToken, category }).subscribe(() => {
         this.categories = null;
         this.onCategoriesChanged.emit();
         resolve();
@@ -76,7 +78,8 @@ export class CategoryService {
 
   public updateCategory(category: Category): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.http.post(APIS.UPDATE_CATEGORY_API, { category }).subscribe(() => {
+      const accessToken = this.userService.getAccessToken();
+      this.http.post(APIS.UPDATE_CATEGORY_API, { accessToken, category }).subscribe(() => {
         this.categories = null;
         this.onCategoriesChanged.emit();
         resolve();
@@ -86,7 +89,8 @@ export class CategoryService {
 
   public removeCategory(category: Category): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.http.post(APIS.REMOVE_CATEGORY_API, { category }).subscribe(() => {
+      const accessToken = this.userService.getAccessToken();
+      this.http.post(APIS.REMOVE_CATEGORY_API, { accessToken, category }).subscribe(() => {
         this.categories = null;
         this.onCategoriesChanged.emit();
         resolve();

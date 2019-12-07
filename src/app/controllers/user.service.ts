@@ -21,6 +21,10 @@ export class UserService {
     });
   }
 
+  getAccessToken(): string {
+    return this.cookie.get(ACCESS_TOKEN_COOKIE);
+  }
+
   login(username: string, password: string): Promise<Admin> {
     return new Promise((resolve, reject) => {
       this.http
