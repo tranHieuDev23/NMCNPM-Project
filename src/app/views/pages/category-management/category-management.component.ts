@@ -35,6 +35,7 @@ export class CategoryManagementComponent implements OnInit {
     this.categoryService.getCategories().then(
       result => {
         this.categories = result;
+        this.table.renderRows();
       },
       error => {
         console.log(error);
@@ -63,10 +64,7 @@ export class CategoryManagementComponent implements OnInit {
       const newCategory = Category.fromJSON(result);
       if (!newCategory) return;
       this.categoryService.addCategory(Category.fromJSON(result)).then(
-        () => {
-          this.categories.push(newCategory);
-          this.table.renderRows();
-        },
+        () => {},
         error => {
           console.log(error);
         }
@@ -81,12 +79,7 @@ export class CategoryManagementComponent implements OnInit {
       .subscribe(result => {
         if (result) {
           this.categoryService.removeCategory(category).then(
-            () => {
-              this.categories = this.categories.filter(item => {
-                return item.getCategoryId() != category.getCategoryId();
-              });
-              this.table.renderRows();
-            },
+            () => {},
             error => {
               console.log(error);
             }
