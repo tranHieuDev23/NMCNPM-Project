@@ -40,6 +40,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
 import { AddUserPopupComponent } from './views/elements/add-user-popup/add-user-popup.component';
 import { YesNoPopupComponent } from './views/elements/yes-no-popup/yes-no-popup.component';
+import { AdminSidebarComponent } from './views/elements/admin-sidebar/admin-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { YesNoPopupComponent } from './views/elements/yes-no-popup/yes-no-popup.
     AdminPageComponent,
     ProductManagementPageComponent,
     AddUserPopupComponent,
-    YesNoPopupComponent
+    YesNoPopupComponent,
+    AdminSidebarComponent
   ],
   imports: [
     BrowserModule,

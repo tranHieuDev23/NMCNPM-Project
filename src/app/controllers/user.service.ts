@@ -25,7 +25,7 @@ export class UserService {
   login(username: string, password: string): Promise<Admin> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<any>(APIS.LOGIN, { username, password })
+        .post<any>(APIS.LOGIN_API, { username, password })
         .subscribe(
           result => {
             const admin = Admin.fromJSON(result.admin);
@@ -49,7 +49,7 @@ export class UserService {
         return;
       }
       this.cookie.delete(ACCESS_TOKEN_COOKIE);
-      this.http.post(APIS.LOGOUT, { accessToken }).subscribe(
+      this.http.post(APIS.LOGOUT_API, { accessToken }).subscribe(
         () => {
           resolve(true);
           this.currentUser.next(null);
@@ -67,7 +67,7 @@ export class UserService {
       const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
       if (accessToken) {
         this.http
-          .post<any>(APIS.RETRIEVE_USER, { accessToken })
+          .post<any>(APIS.RETRIEVE_USER_API, { accessToken })
           .subscribe(
             (result: any) => {
               const admin = Admin.fromJSON(result);
@@ -107,7 +107,7 @@ export class UserService {
         return;
       }
       this.http
-        .post<Admin[]>(APIS.RETRIEVE_USERS, { accessToken })
+        .post<Admin[]>(APIS.RETRIEVE_USERS_API, { accessToken })
         .toPromise()
         .then(
           result => {
@@ -132,7 +132,7 @@ export class UserService {
         return;
       }
       this.http
-        .post<Admin>(APIS.ADD_USER, { admin, password, accessToken })
+        .post<Admin>(APIS.ADD_USER_API, { admin, password, accessToken })
         .toPromise()
         .then(
           result => {
@@ -155,7 +155,7 @@ export class UserService {
         return;
       }
       this.http
-        .post<Admin>(APIS.UPDATE_USER, { admin, accessToken })
+        .post<Admin>(APIS.UPDATE_USER_API, { admin, accessToken })
         .toPromise()
         .then(
           result => {
@@ -178,7 +178,7 @@ export class UserService {
         return;
       }
       this.http
-        .post<Admin>(APIS.REMOVE_USER, { admin, accessToken })
+        .post<Admin>(APIS.REMOVE_USER_API, { admin, accessToken })
         .toPromise()
         .then(resolve, reject);
     });
