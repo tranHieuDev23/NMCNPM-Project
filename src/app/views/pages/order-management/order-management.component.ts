@@ -41,7 +41,6 @@ export class OrderManagementComponent implements OnInit {
       result => {
         this.orders = result;
         this.table.renderRows();
-        console.log(this.orders);
       },
       error => {
         console.log(error);
@@ -56,10 +55,7 @@ export class OrderManagementComponent implements OnInit {
       .subscribe(result => {
         if (!result) return;
         this.orderService.removeOrder(order).then(
-          () => {
-            this.initOrders();
-            this.table.renderRows();
-          },
+          () => {},
           error => {
             console.log(error);
           }

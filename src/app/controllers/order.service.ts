@@ -45,7 +45,7 @@ export class OrderService {
     return new Promise((resolve, reject) => {
       const accessToken = this.userService.getAccessToken();
       this.http
-        .post(APIS.REMOVE_ORDER_API, { accessToken })
+        .post(APIS.REMOVE_ORDER_API, { accessToken, orderId: order.getOrderId() })
         .subscribe(() => {
           this.onOrdersUpdated.emit();
           resolve();

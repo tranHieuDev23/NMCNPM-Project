@@ -87,6 +87,7 @@ export class CartPageComponent implements OnInit {
         this.orderService
           .addOrder(
             new Order(
+              null,
               new Customer(
                 null,
                 result.name,
