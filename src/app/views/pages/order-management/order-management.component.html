@@ -1,8 +1,39 @@
 <mat-sidenav-container class="example-container">
-        <mat-sidenav mode="side" opened>
-            <app-admin-sidebar></app-admin-sidebar>
-        </mat-sidenav>
-        <mat-sidenav-content class="content">
-            <h2>Danh sách đơn hàng</h2>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
+        <app-admin-sidebar></app-admin-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
+        <h2>Danh sách đơn hàng</h2>
+
+        <table #table mat-table [dataSource]="orders" style="margin-bottom: 1.5rem;">
+            <ng-container matColumnDef="customerName">
+                <th mat-header-cell *matHeaderCellDef> Tên khách hàng </th>
+                <td mat-cell *matCellDef="let order"> {{ order.getCustomer().getName() }} </td>
+            </ng-container>
+            <ng-container matColumnDef="customerEmail">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let order"> {{ order.getCustomer().getEmail() }} </td>
+            </ng-container>
+            <ng-container matColumnDef="customerPhone">
+                <th mat-header-cell *matHeaderCellDef> Số điện thoại </th>
+                <td mat-cell *matCellDef="let order"> {{ order.getCustomer().getPhone() }} </td>
+            </ng-container>
+            <ng-container matColumnDef="customerAddress">
+                <th mat-header-cell *matHeaderCellDef> Địa chỉ </th>
+                <td mat-cell *matCellDef="let order"> {{ order.getCustomer().getAddress() }} </td>
+            </ng-container>
+            <ng-container matColumnDef="customerRegion">
+                <th mat-header-cell *matHeaderCellDef> Tỉnh thành </th>
+                <td mat-cell *matCellDef="let order"> {{ order.getCustomer().getCityRegion() }} </td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Tùy chọn </th>
+                <td mat-cell *matCellDef="let order">
+                    <button mat-stroked-button color="warn" (click)="onRemoveOrder(order)">Xóa</button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+        </table>
+    </mat-sidenav-content>
+</mat-sidenav-container>

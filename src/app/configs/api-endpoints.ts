@@ -11,8 +11,9 @@ export const APIS = {
   UPDATE_PRODUCT_API: "/api/update-product",
   REMOVE_PRODUCT_API: "/api/remove-product",
 
-  ADD_ORDER_API: "/api/add-order",
   RETRIEVE_ORDERS_API: "/api/retrieve-orders",
+  ADD_ORDER_API: "/api/add-order",
+  REMOVE_ORDER_API: "/api/remove-order",
 
   RETRIEVE_USERS_API: "/api/retrieve-users",
   RETRIEVE_USER_API: "/api/retrieve-user",

@@ -1,13 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import Order from "../models/order";
 import { HttpClient } from "@angular/common/http";
 import { APIS } from "../configs/api-endpoints";
+import { UserService } from "./user.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class OrderService {
-  constructor(private http: HttpClient) {}
+  public onOrdersUpdated: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   public addOrder(order: Order): Promise<Object> {
     return this.http
@@ -17,10 +20,11 @@ export class OrderService {
       .toPromise();
   }
 
-  public retrieveOrders(): Promise<Order[]> {
+  public retrieveAllOrder(): Promise<Order[]> {
     return new Promise((resolve, reject) => {
+      const accessToken = this.userService.getAccessToken();
       this.http
-        .post<any[]>(APIS.RETRIEVE_ORDERS_API, {})
+        .post<any[]>(APIS.RETRIEVE_ORDERS_API, { accessToken })
         .toPromise()
         .then(
           result => {
@@ -34,6 +38,18 @@ export class OrderService {
             reject(error);
           }
         );
+    });
+  }
+
+  public removeOrder(order: Order): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const accessToken = this.userService.getAccessToken();
+      this.http
+        .post(APIS.REMOVE_ORDER_API, { accessToken })
+        .subscribe(() => {
+          this.onOrdersUpdated.emit();
+          resolve();
+        }, reject);
     });
   }
 }
