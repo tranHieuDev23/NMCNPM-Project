@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'ng-shopping-cart';
 import ProductCartItem from 'src/app/models/cart-item';
-import { ProductService } from 'src/app/controllers/product.service';
 import Category from 'src/app/models/category';
 import { UserService } from 'src/app/controllers/user.service';
 import Admin from 'src/app/models/admin';
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/controllers/category.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private cartService: CartService<ProductCartItem>,
-    private productService: ProductService,
+    private categoryService: CategoryService,
     private userService: UserService,
     private router: Router
   ) {
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   }
 
   initialize() {
-    this.productService.getCategories().then((result) => {
+    this.categoryService.getCategories().then((result) => {
       this.categories = result;
     }, (error) => {
       console.log(error);

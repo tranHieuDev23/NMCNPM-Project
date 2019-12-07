@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { OrderPopupComponent } from "../../elements/order-popup/order-popup.component";
 import { ActivatedRoute, ParamMap, Params } from "@angular/router";
 import { PageEvent, MatPaginator } from "@angular/material/paginator";
+import { CategoryService } from 'src/app/controllers/category.service';
 
 @Component({
   selector: "app-home",
@@ -21,6 +22,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private categoryService: CategoryService,
     private dialog: MatDialog,
     private route: ActivatedRoute
   ) {}
@@ -46,7 +48,7 @@ export class HomePageComponent implements OnInit {
         }
       );
     } else {
-      this.productService.getCategory(+categoryId).then(
+      this.categoryService.getCategory(+categoryId).then(
         result => {
           this.selectedCategory = result;
           this.productService.getProductsOfCategory(this.selectedCategory).then(

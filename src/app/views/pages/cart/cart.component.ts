@@ -27,7 +27,6 @@ export class CartPageComponent implements OnInit {
     total: "Thành tiền"
   };
 
-  public categories: Category[] = [];
   public showButtons: boolean = false;
 
   constructor(
@@ -38,22 +37,10 @@ export class CartPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initialize();
     this.update();
     this.cartService.onItemsChanged.subscribe(() => {
       this.update();
     });
-  }
-
-  initialize() {
-    this.productService.getCategories().then(
-      result => {
-        this.categories = result;
-      },
-      error => {
-        console.log(error);
-      }
-    );
   }
 
   update() {

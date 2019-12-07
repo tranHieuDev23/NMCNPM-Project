@@ -6,9 +6,10 @@ import { CartPageComponent } from "./views/pages/cart/cart.component";
 import { LoginPageComponent } from "./views/pages/login/login.component";
 import { AdminPageComponent } from "./views/pages/admin/admin.component";
 import { ProductManagementPageComponent } from "./views/pages/product-management/product-management.component";
-import { UserService } from "./controllers/user.service";
 import { RouteLoginGuardService } from "./controllers/route-login-guard.service";
 import { RouteLogoutGuardService } from "./controllers/route-logout-guard.service";
+import { CategoryManagementComponent } from "./views/pages/category-management/category-management.component";
+import { OrderManagementComponent } from "./views/pages/order-management/order-management.component";
 
 const appRoutes: Routes = [
   { path: "product/:product-id", component: ProductPageComponent },
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
     children: [
       { path: "admins", component: AdminPageComponent },
       { path: "products", component: ProductManagementPageComponent },
-      { path: "**", redirectTo: "admins" }
+      { path: "categories", component: CategoryManagementComponent },
+      { path: "orders", component: OrderManagementComponent },
     ]
   },
   { path: "**", component: HomePageComponent }

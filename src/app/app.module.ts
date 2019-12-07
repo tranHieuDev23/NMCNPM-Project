@@ -41,6 +41,8 @@ import { ProductManagementPageComponent } from './views/pages/product-management
 import { AddUserPopupComponent } from './views/elements/add-user-popup/add-user-popup.component';
 import { YesNoPopupComponent } from './views/elements/yes-no-popup/yes-no-popup.component';
 import { AdminSidebarComponent } from './views/elements/admin-sidebar/admin-sidebar.component';
+import { CategoryManagementComponent } from './views/pages/category-management/category-management.component';
+import { OrderManagementComponent } from './views/pages/order-management/order-management.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { AdminSidebarComponent } from './views/elements/admin-sidebar/admin-side
     ProductManagementPageComponent,
     AddUserPopupComponent,
     YesNoPopupComponent,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    CategoryManagementComponent,
+    OrderManagementComponent
   ],
   imports: [
     BrowserModule,
