@@ -15,3 +15,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding-top: 0;
     min-height: 320px;
 }
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 8px !important;
+}
+
+.table-image {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+}

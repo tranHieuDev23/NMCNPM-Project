@@ -43,6 +43,7 @@ import { YesNoPopupComponent } from './views/elements/yes-no-popup/yes-no-popup.
 import { AdminSidebarComponent } from './views/elements/admin-sidebar/admin-sidebar.component';
 import { CategoryManagementComponent } from './views/pages/category-management/category-management.component';
 import { OrderManagementComponent } from './views/pages/order-management/order-management.component';
+import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { OrderManagementComponent } from './views/pages/order-management/order-m
     YesNoPopupComponent,
     AdminSidebarComponent,
     CategoryManagementComponent,
-    OrderManagementComponent
+    OrderManagementComponent,
+    FormDialogComponent
   ],
   imports: [
     BrowserModule,

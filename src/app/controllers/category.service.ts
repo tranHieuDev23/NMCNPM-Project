@@ -1,12 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import Category from '../models/category';
-import { APIS } from '../configs/api-endpoints';
+import Category from "../models/category";
+import { APIS } from "../configs/api-endpoints";
 
 @Injectable({
   providedIn: "root"
 })
 export class CategoryService {
+  public onCategoriesChanged: EventEmitter<void> = new EventEmitter<void>();
   private categories: Category[] = null;
 
   constructor(private http: HttpClient) {}
@@ -60,6 +61,36 @@ export class CategoryService {
             reject(error);
           }
         );
+    });
+  }
+
+  public addCategory(category: Category): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.http.post(APIS.ADD_CATEGORY_API, { category }).subscribe(() => {
+        this.categories = null;
+        this.onCategoriesChanged.emit();
+        resolve();
+      }, reject);
+    });
+  }
+
+  public updateCategory(category: Category): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.http.post(APIS.UPDATE_CATEGORY_API, { category }).subscribe(() => {
+        this.categories = null;
+        this.onCategoriesChanged.emit();
+        resolve();
+      }, reject);
+    });
+  }
+
+  public removeCategory(category: Category): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.http.post(APIS.REMOVE_CATEGORY_API, { category }).subscribe(() => {
+        this.categories = null;
+        this.onCategoriesChanged.emit();
+        resolve();
+      }, reject);
     });
   }
 }

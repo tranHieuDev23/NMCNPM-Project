@@ -30,14 +30,17 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initialize();
-    this.update();
+    this.initCategories();
+    this.initItemsCount();
+    this.categoryService.onCategoriesChanged.subscribe(() => {
+      this.initCategories();
+    })
     this.cartService.onItemsChanged.subscribe(() => {
-      this.update();
+      this.initItemsCount();
     });
   }
 
-  initialize() {
+  initCategories() {
     this.categoryService.getCategories().then((result) => {
       this.categories = result;
     }, (error) => {
@@ -45,7 +48,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  update() {
+  initItemsCount() {
     this.numberOfItems = this.cartService.getItems().length;
   }
 

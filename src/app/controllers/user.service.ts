@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import Admin from "../models/admin";
 import { CookieService } from "ngx-cookie-service";
 import { APIS } from "../configs/api-endpoints";
-import { EventEmitter } from 'events';
 import { BehaviorSubject } from 'rxjs';
 
 const ACCESS_TOKEN_COOKIE = "accessToken";

@@ -4,6 +4,29 @@
     </mat-sidenav>
     <mat-sidenav-content class="content">
         <h2>Danh sách loại sản phẩm</h2>
-        
+
+        <table #table mat-table [dataSource]="categories" style="margin-bottom: 1.5rem;">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Tên </th>
+                <td mat-cell *matCellDef="let category"> {{category.getName()}} </td>
+            </ng-container>
+            <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef> Ảnh đại diện </th>
+                <td mat-cell *matCellDef="let category">
+                    <img class="table-image" [src]="category.getImage()" />
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Tùy chọn </th>
+                <td mat-cell *matCellDef="let category">
+                    <button mat-stroked-button color="primary" style="margin-right: 4px;">Chỉnh sửa</button>
+                    <button mat-stroked-button color="warn" (click)="onRemovecategory(category)">Xóa</button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+        </table>
+
+        <button mat-stroked-button color="primary" (click)="onCreateCategory()">Thêm loại sản phẩm</button>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -11,7 +11,7 @@
     <span class="fill-remaining-space"></span>
     <a *ngIf="admin == null" mat-button color="white" routerLink="/login">Đăng nhập</a>
     <span *ngIf="admin">
-        <a mat-button routerLink="/admin">Giao diện quản trị viên</a>
+        <a mat-button routerLink="/admin/admins">Giao diện quản trị viên</a>
         <a mat-button [matMenuTriggerFor]="adminMenu" color="white">{{ admin.getUsername() }}</a>
         <mat-menu #adminMenu="matMenu">
             <button mat-menu-item (click)="onLogout()">
