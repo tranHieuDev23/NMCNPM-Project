@@ -150,7 +150,7 @@ export class UserService {
     });
   }
 
-  updateUser(admin: Admin): Promise<Admin> {
+  updateUser(admin: Admin): Promise<void> {
     return new Promise((resolve, reject) => {
       const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
       if (!accessToken) {
@@ -162,9 +162,7 @@ export class UserService {
         .toPromise()
         .then(
           result => {
-            const createdAdmin = Admin.fromJSON(result);
-            if (createdAdmin) resolve(createdAdmin);
-            else reject("Error while deserialize response!");
+            resolve();
           },
           error => {
             reject(error);

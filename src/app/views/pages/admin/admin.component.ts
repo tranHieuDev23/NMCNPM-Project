@@ -22,6 +22,10 @@ export class AdminPageComponent implements OnInit {
   constructor(private userService: UserService, private dialog: MatDialog) {}
 
   ngOnInit() {
+    this.initAdmins();
+  }
+
+  initAdmins(): void {
     this.userService.getAllUSer().then(
       result => {
         this.admins = result;
@@ -58,6 +62,33 @@ export class AdminPageComponent implements OnInit {
             console.log(error);
           });
       }
+    });
+  }
+
+  onUpdateAdmin(admin: Admin): void {
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      width: '600px',
+      data: {
+        title: `Cập nhật thông tin của quản trị viên ${admin.getUsername()}`,
+        items: [
+          new FormControlItem({placeholder: "Username", name: "username", value: admin.getUsername()}),
+          new FormControlItem({placeholder: "Email", type: "email", name: "email", value: admin.getEmail()}),
+          new FormControlItem({placeholder: "Số điện thoại", type: "tel", name: "phone", value: admin.getPhone()})
+        ],
+        completedText: "Hoàn tất",
+        cancelText: "Hủy bỏ"
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result)
+        return;
+      result['adminId'] = admin.getAdminId();
+      const newAdmin = Admin.fromJSON(result);
+      this.userService.updateUser(newAdmin).then((result) => {
+        this.initAdmins();
+      }, (error) => {
+        console.log(error);
+      });
     });
   }
 
