@@ -19,7 +19,7 @@
             <ng-container matColumnDef="edit">
                 <th mat-header-cell *matHeaderCellDef> Tùy chọn </th>
                 <td mat-cell *matCellDef="let category">
-                    <button mat-stroked-button color="primary" style="margin-right: 4px;">Chỉnh sửa</button>
+                    <button mat-stroked-button color="primary" style="margin-right: 4px;" (click)="onUpdateCategory(category)">Chỉnh sửa</button>
                     <button mat-stroked-button color="warn" (click)="onRemoveCategory(category)">Xóa</button>
                 </td>
             </ng-container>

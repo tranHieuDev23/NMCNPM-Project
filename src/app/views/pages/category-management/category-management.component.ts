@@ -49,8 +49,8 @@ export class CategoryManagementComponent implements OnInit {
       data: {
         title: "Điền thông tin để tạo loại sản phẩm mới",
         items: [
-          new FormControlItem("input", "Tên", "text", "name"),
-          new FormControlItem("input", "Ảnh đại diện", "text", "image")
+          new FormControlItem({placeholder: "Tên", name: "name"}),
+          new FormControlItem({placeholder: "Ảnh đại diện", name: "image"})
         ],
         completedText: "Hoàn tất",
         cancelText: "Hủy bỏ"
@@ -63,7 +63,37 @@ export class CategoryManagementComponent implements OnInit {
       result.image = result.image.trim();
       const newCategory = Category.fromJSON(result);
       if (!newCategory) return;
-      this.categoryService.addCategory(Category.fromJSON(result)).then(
+      this.categoryService.addCategory(newCategory).then(
+        () => {},
+        error => {
+          console.log(error);
+        }
+      );
+    });
+  }
+
+  onUpdateCategory(category: Category): void {
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      width: "600px",
+      data: {
+        title: `Cập nhật thông tin của loại sản phẩm ${category.getName()}`,
+        items: [
+          new FormControlItem({placeholder: "Tên", name: "name", value: category.getName()}),
+          new FormControlItem({placeholder: "Ảnh đại diện", name: "image", value: category.getImage()})
+        ],
+        completedText: "Hoàn tất",
+        cancelText: "Hủy bỏ"
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      result.categoryId = category.getCategoryId();
+      result.name = result.name.trim();
+      result.image = result.image.trim();
+      const newCategory = Category.fromJSON(result);
+      if (!newCategory) return;
+      this.categoryService.updateCategory(newCategory).then(
         () => {},
         error => {
           console.log(error);
