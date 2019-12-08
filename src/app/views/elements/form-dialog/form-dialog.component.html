@@ -6,9 +6,9 @@
         <input *ngIf="item.controlType == 'input'" matInput [placeholder]="item.placeholder" [type]="item.type? item.type : 'text'" [(ngModel)]="item.value">
         <textarea *ngIf="item.controlType == 'textarea'" matInput [placeholder]="item.placeholder"
             [(ngModel)]="item.value"></textarea>
-        <mat-select *ngIf="item.controlType == 'select'" [placeholder]="item.placeholder" [(ngModel)]="item.value">
-            <mat-option *ngFor="let option of item.options" [value]="option">
-                {{ option }}
+        <mat-select *ngIf="item.controlType == 'select'" [placeholder]="item.placeholder" [(ngModel)]="item.value" [compareWith]="item.compareWith">
+            <mat-option *ngFor="let option of item.options; index as i" [value]="option">
+                {{ item.optionTexts[i] }}
             </mat-option>
         </mat-select>
     </mat-form-field>

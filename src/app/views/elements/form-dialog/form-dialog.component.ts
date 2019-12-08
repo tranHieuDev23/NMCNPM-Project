@@ -5,23 +5,24 @@ export class FormControlItem {
   public controlType: string = "input";
   public placeholder: string;
   public type: string = "text";
-  public options: string[] = [];
+  public options: any[] = [];
+  public optionTexts: string[] = [];
   public name: string;
   public value: any = null;
+  public compareWith: (o1: any, o2: any) => boolean = () => {
+    return false;
+  };
 
   constructor(data: any) {
-    if (data.controlType)
-      this.controlType = data.controlType;
-    if (data.placeholder)
-      this.placeholder = data.placeholder;
-    if (data.type)
-      this.type = data.type;
-    if (data.options)
-      this.options = data.options;
-    if (data.name)
-      this.name = data.name;
-    if (data.value)
-      this.value = data.value;
+    if (data.controlType) this.controlType = data.controlType;
+    if (data.placeholder) this.placeholder = data.placeholder;
+    if (data.type) this.type = data.type;
+    if (data.options) this.options = data.options;
+    if (data.optionTexts) this.optionTexts = data.optionTexts;
+    else if (data.options) this.optionTexts = data.options;
+    if (data.name) this.name = data.name;
+    if (data.value) this.value = data.value;
+    if (data.compareWith) this.compareWith = data.compareWith;  
   }
 }
 
