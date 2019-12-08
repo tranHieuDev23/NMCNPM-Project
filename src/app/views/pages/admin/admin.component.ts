@@ -38,10 +38,10 @@ export class AdminPageComponent implements OnInit {
       data: {
         title: "Điền thông tin để tạo quản trị viên mới",
         items: [
-          new FormControlItem("input", "Username", "text", "username"),
-          new FormControlItem("input", "Mật khẩu", "password", "password"),
-          new FormControlItem("input", "Email", "email", "email"),
-          new FormControlItem("input", "Số điện thoại", "tel", "phone")
+          new FormControlItem({placeholder: "Username", name: "username"}),
+          new FormControlItem({placeholder: "Mật khẩu", type: "password", name: "password"}),
+          new FormControlItem({placeholder: "Email", type: "email", name: "email"}),
+          new FormControlItem({placeholder: "Số điện thoại", type: "tel", name: "phone"})
         ],
         completedText: "Hoàn tất",
         cancelText: "Hủy bỏ"

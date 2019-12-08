@@ -2,14 +2,27 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export class FormControlItem {
+  public controlType: string = "input";
+  public placeholder: string;
+  public type: string = "text";
+  public options: string[] = [];
+  public name: string;
   public value: any = null;
-  constructor(
-    public controlType: string,
-    public placeholder: string,
-    public type: string,
-    public name: string,
-    public options: string[] = []
-  ) {}
+
+  constructor(data: any) {
+    if (data.controlType)
+      this.controlType = data.controlType;
+    if (data.placeholder)
+      this.placeholder = data.placeholder;
+    if (data.type)
+      this.type = data.type;
+    if (data.options)
+      this.options = data.options;
+    if (data.name)
+      this.name = data.name;
+    if (data.value)
+      this.value = data.value;
+  }
 }
 
 @Component({

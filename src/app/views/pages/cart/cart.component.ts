@@ -65,17 +65,16 @@ export class CartPageComponent implements OnInit {
       data: {
         title: "Điền thông tin để hoàn tất đơn hàng",
         items: [
-          new FormControlItem("input", "Tên", "text", "name"),
-          new FormControlItem("input", "Email", "email", "email"),
-          new FormControlItem("input", "Số điện thoại", "phone", "phone"),
-          new FormControlItem("input", "Địa chỉ", "text", "address"),
-          new FormControlItem(
-            "select",
-            "Tỉnh thành",
-            "",
-            "region",
-            ALL_CITY_REGIONS
-          )
+          new FormControlItem({placeholder: "Tên", name: "name"}),
+          new FormControlItem({placeholder: "Email", type: "email", name: "email"}),
+          new FormControlItem({placeholder: "Số điện thoại", type: "tel", name: "phone"}),
+          new FormControlItem({placeholder: "Địa chỉ", name: "address"}),
+          new FormControlItem({
+            controlType: "select",
+            placeholder: "Tỉnh thành",
+            name: "region",
+            options: ALL_CITY_REGIONS
+          })
         ],
         completedText: "Mua hàng",
         cancelText: "Hủy"
