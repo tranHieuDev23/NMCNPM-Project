@@ -2,16 +2,29 @@
     {{ title }}
 </h2>
 <mat-dialog-content *ngIf="items" fxLayout="column" class="form">
-    <mat-form-field *ngFor="let item of items">
-        <input *ngIf="item.controlType == 'input'" matInput [placeholder]="item.placeholder" [type]="item.type? item.type : 'text'" [(ngModel)]="item.value">
-        <textarea *ngIf="item.controlType == 'textarea'" matInput [placeholder]="item.placeholder"
-            [(ngModel)]="item.value"></textarea>
-        <mat-select *ngIf="item.controlType == 'select'" [placeholder]="item.placeholder" [(ngModel)]="item.value" [compareWith]="item.compareWith">
-            <mat-option *ngFor="let option of item.options; index as i" [value]="option">
-                {{ item.optionTexts[i] }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <ng-container *ngFor="let item of items">
+        <mat-form-field
+            *ngIf="item.controlType == 'input' || item.controlType == 'textarea' || item.controlType == 'select'">
+            <input *ngIf="item.controlType == 'input'" matInput [placeholder]="item.placeholder"
+                [type]="item.type? item.type : 'text'" [(ngModel)]="item.value">
+            <textarea *ngIf="item.controlType == 'textarea'" matInput [placeholder]="item.placeholder"
+                [(ngModel)]="item.value"></textarea>
+            <mat-select *ngIf="item.controlType == 'select'" [placeholder]="item.placeholder" [(ngModel)]="item.value"
+                [compareWith]="item.compareWith">
+                <mat-option *ngFor="let option of item.options; index as i" [value]="option">
+                    {{ item.optionTexts[i] }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div fxFlex="100%" *ngIf="item.controlType == 'rich'" style="padding-bottom: 20px;">
+            <div style="padding-bottom: 8px;">
+                <label style="font-size: 12px; color: rgba(0, 0, 0, 0.54);">{{ item.placeholder }}</label>
+            </div>
+            <div>
+                <ckeditor [editor]="item.editor" [data]="item.value" (change)="onRichEditorChanged(item, $event)"></ckeditor>
+            </div>
+        </div>
+    </ng-container>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-stroked-button color="primary" (click)="onCompleted()">{{ completedText }}</button>

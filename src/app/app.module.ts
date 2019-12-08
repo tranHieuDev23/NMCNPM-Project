@@ -42,6 +42,7 @@ import { AdminSidebarComponent } from './views/elements/admin-sidebar/admin-side
 import { CategoryManagementComponent } from './views/pages/category-management/category-management.component';
 import { OrderManagementComponent } from './views/pages/order-management/order-management.component';
 import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.co
     MatInputModule,
     MatSnackBarModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    CKEditorModule
   ],
   providers: [
     CookieService

@@ -1,5 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular';
 
 export class FormControlItem {
   public controlType: string = "input";
@@ -12,6 +14,7 @@ export class FormControlItem {
   public compareWith: (o1: any, o2: any) => boolean = () => {
     return false;
   };
+  public editor = null;
 
   constructor(data: any) {
     if (data.controlType) this.controlType = data.controlType;
@@ -23,6 +26,11 @@ export class FormControlItem {
     if (data.name) this.name = data.name;
     if (data.value) this.value = data.value;
     if (data.compareWith) this.compareWith = data.compareWith;  
+    if (this.controlType == 'rich') {
+      this.editor = ClassicEditor;
+      if (!this.value)
+        this.value = "";
+    }
   }
 }
 
@@ -57,5 +65,9 @@ export class FormDialogComponent {
 
   onCancel() {
     this.dialogRef.close(null);
+  }
+
+  onRichEditorChanged(item: FormControlItem, event: ChangeEvent): void {
+    item.value = event.editor.getData();
   }
 }

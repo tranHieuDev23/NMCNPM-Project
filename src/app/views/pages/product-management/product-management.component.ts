@@ -106,17 +106,17 @@ export class ProductManagementPageComponent implements OnInit {
               new FormControlItem({
                 placeholder: "Thông tin cụ thể về sản phẩm",
                 name: "information",
-                controlType: "textarea"
+                controlType: "rich"
               }),
               new FormControlItem({
                 placeholder: "Thông tin phụ kiện",
                 name: "accessories",
-                controlType: "textarea"
+                controlType: "rich"
               }),
               new FormControlItem({
                 placeholder: "Thông tin bảo hành",
                 name: "guaranty",
-                controlType: "textarea"
+                controlType: "rich"
               }),
               new FormControlItem({
                 placeholder: "Ảnh slideshow thứ nhất",
@@ -214,19 +214,19 @@ export class ProductManagementPageComponent implements OnInit {
               new FormControlItem({
                 placeholder: "Thông tin cụ thể về sản phẩm",
                 name: "information",
-                controlType: "textarea",
+                controlType: "rich",
                 value: product.getDetail().getInformation()
               }),
               new FormControlItem({
                 placeholder: "Thông tin phụ kiện",
                 name: "accessories",
-                controlType: "textarea",
+                controlType: "rich",
                 value: product.getDetail().getAccessories()
               }),
               new FormControlItem({
                 placeholder: "Thông tin bảo hành",
                 name: "guaranty",
-                controlType: "textarea",
+                controlType: "rich",
                 value: product.getDetail().getGuaranty()
               }),
               new FormControlItem({
