@@ -95,7 +95,8 @@ export class CartPageComponent implements OnInit {
                 result.address,
                 result.region
               ),
-              this.cartService.getItems()
+              this.cartService.getItems(),
+              null
             )
           )
           .then(
