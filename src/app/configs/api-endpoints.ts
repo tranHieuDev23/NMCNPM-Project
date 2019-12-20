@@ -13,6 +13,7 @@ export const APIS = {
 
   RETRIEVE_ORDERS_API: "/api/retrieve-orders",
   ADD_ORDER_API: "/api/add-order",
+  UPDATE_ORDER_STATUS_API: "/api/update-order-status",
   REMOVE_ORDER_API: "/api/remove-order",
 
   RETRIEVE_USERS_API: "/api/retrieve-users",

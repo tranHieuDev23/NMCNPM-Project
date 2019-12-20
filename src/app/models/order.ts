@@ -9,8 +9,6 @@ enum OrderStatus {
   CANCELLED
 }
 
-var orderStatusIdMap = null;
-
 function getOrderStatusFromId(id: number): OrderStatus {
   switch (id) {
     case OrderStatus.CONFIRMING:
@@ -67,11 +65,10 @@ class Order {
         result.products.push(ProductCartItem.fromJSON(element));
       });
     }
-    console.log(result);
     return result;
   }
 }
 
 export default Order;
 
-export { OrderStatus };
+export { OrderStatus, getOrderStatusFromId };

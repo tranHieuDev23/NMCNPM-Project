@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from "@angular/core";
-import Order from "../models/order";
+import Order, { OrderStatus } from "../models/order";
 import { HttpClient } from "@angular/common/http";
 import { APIS } from "../configs/api-endpoints";
 import { UserService } from "./user.service";
@@ -38,6 +38,21 @@ export class OrderService {
             reject(error);
           }
         );
+    });
+  }
+
+  public updateOrderStatus(order: Order, nextStatus: OrderStatus): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const accessToken = this.userService.getAccessToken();
+      if (!accessToken) {
+        reject("No access token was found!");
+        return;
+      }
+      this.http.post(APIS.UPDATE_ORDER_STATUS_API, {
+        orderId: order.getOrderId(),
+        nextStatus,
+        accessToken
+      }).subscribe(resolve, reject);
     });
   }
 
