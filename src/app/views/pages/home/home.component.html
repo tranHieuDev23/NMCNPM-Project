@@ -10,7 +10,8 @@
             <div fxFlex="80%" style="padding-left: 24px">
                 <h2>{{ selectedProduct.getName() }}</h2>
                 <p>{{ selectedProduct.getDescription() }}</p>
-                <p>{{ selectedProduct.getPrice() }} VND</p>
+                <p>{{ selectedProduct.getPrice() }} ₫</p>
+                <p>Số lượng còn lại: {{ selectedProduct.getQuantity() }}</p>
                 <a mat-raised-button style="margin-right: 4px;"
                     routerLink="/product/{{ selectedProduct.getProductId() }}">Xem thêm</a>
                 <a mat-raised-button (click)='openDialog()'>Mua ngay</a>
@@ -27,7 +28,7 @@
                         <mat-card-title (click)="setSelectedProduct(product)">{{ product.getName() }}
                         </mat-card-title>
                         <mat-card-subtitle>{{ product.getDescription() }}</mat-card-subtitle>
-                        <mat-card-subtitle>{{ product.getPrice() }} VND</mat-card-subtitle>
+                        <mat-card-subtitle>{{ product.getPrice() }} ₫</mat-card-subtitle>
                     </mat-card-header>
                 </mat-card>
             </div>

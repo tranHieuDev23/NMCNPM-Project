@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { OrderService } from "src/app/controllers/order.service";
-import Order, { OrderStatus, getOrderStatusFromId } from "src/app/models/order";
+import Order, { OrderStatus, getOrderStatusFromId, getOrderStatusString, PaymentMethod, getPaymentMethodString } from "src/app/models/order";
 import { MatTable } from "@angular/material/table";
 import { MatDialog } from "@angular/material/dialog";
 import { YesNoPopupComponent } from "../../elements/yes-no-popup/yes-no-popup.component";
@@ -56,20 +56,11 @@ export class OrderManagementComponent implements OnInit {
   }
 
   getOrderStatusString(status: OrderStatus): string {
-    switch (status) {
-      case OrderStatus.CONFIRMING:
-        return "Đang xác nhận";
-      case OrderStatus.PREPARING:
-        return "Đang chuẩn bị";
-      case OrderStatus.SHIPPING:
-        return "Đang giao hàng";
-      case OrderStatus.DONE:
-        return "Hoàn tất";
-      case OrderStatus.CANCELLED:
-        return "Đã bị hủy";
-      default:
-        return "Invalid status!";
-    }
+    return getOrderStatusString(status);
+  }
+
+  getPaymentMethodString(method: PaymentMethod): string {
+    return getPaymentMethodString(method);
   }
 
   isIncompletedOrder(order: Order): boolean {

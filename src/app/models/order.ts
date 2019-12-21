@@ -1,5 +1,5 @@
 import ProductCartItem from "./cart-item";
-import User from './user';
+import User from "./user";
 
 enum OrderStatus {
   CONFIRMING,
@@ -7,12 +7,40 @@ enum OrderStatus {
   SHIPPING,
   DONE,
   CANCELLED
-};
+}
+
+function getOrderStatusString(status: OrderStatus): string {
+  switch (status) {
+    case OrderStatus.CONFIRMING:
+      return "Đang xác nhận";
+    case OrderStatus.PREPARING:
+      return "Đang chuẩn bị";
+    case OrderStatus.SHIPPING:
+      return "Đang giao hàng";
+    case OrderStatus.DONE:
+      return "Hoàn tất";
+    case OrderStatus.CANCELLED:
+      return "Đã bị hủy";
+    default:
+      return "Invalid status!";
+  }
+}
 
 enum PaymentMethod {
   CASH_ON_DELIVERY,
   BANK_TRANSFER
-};
+}
+
+function getPaymentMethodString(method: PaymentMethod): string {
+  switch (method) {
+    case PaymentMethod.CASH_ON_DELIVERY:
+      return "Thanh toán khi nhận hàng";
+    case PaymentMethod.BANK_TRANSFER:
+      return "Thanh toán chuyển khoản";
+    default:
+      return "Invalid method!";
+  }
+}
 
 function getOrderStatusFromId(id: number): OrderStatus {
   switch (id) {
@@ -82,4 +110,10 @@ class Order {
 
 export default Order;
 
-export { OrderStatus, getOrderStatusFromId, PaymentMethod };
+export {
+  OrderStatus,
+  getOrderStatusFromId,
+  getOrderStatusString,
+  PaymentMethod,
+  getPaymentMethodString
+};

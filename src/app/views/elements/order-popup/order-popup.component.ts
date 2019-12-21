@@ -28,9 +28,9 @@ export class OrderPopupComponent {
         this.product.getProductId()
       );
       if (item != null) this.quantity = item.getQuantity();
-      else this.quantity = 0;
+      else this.quantity = 1;
     } else {
-      this.quantity = 0;
+      this.quantity = 1;
     }
   }
 
