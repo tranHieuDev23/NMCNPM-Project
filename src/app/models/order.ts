@@ -1,5 +1,5 @@
-import Customer from "./customer";
 import ProductCartItem from "./cart-item";
+import User from './user';
 
 enum OrderStatus {
   CONFIRMING,
@@ -29,7 +29,7 @@ function getOrderStatusFromId(id: number): OrderStatus {
 class Order {
   constructor(
     private orderId: number,
-    private customer: Customer,
+    private orderedUser: User,
     private products: ProductCartItem[],
     private status: OrderStatus
   ) {}
@@ -38,8 +38,8 @@ class Order {
     return this.orderId;
   }
 
-  public getCustomer(): Customer {
-    return this.customer;
+  public getOrderedUser(): User {
+    return this.orderedUser;
   }
 
   public getProducts(): ProductCartItem[] {
@@ -54,7 +54,7 @@ class Order {
     if (data == null || data == undefined) return null;
     const result = new Order(
       data.orderId,
-      Customer.fromJSON(data.customer),
+      User.fromJSON(data.orderedUser),
       [],
       data.status != null && data.status != undefined
         ? getOrderStatusFromId(data.status)

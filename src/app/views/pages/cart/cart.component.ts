@@ -10,7 +10,6 @@ import {
 import { ALL_CITY_REGIONS } from "./regions";
 import { OrderService } from "src/app/controllers/order.service";
 import Order from "src/app/models/order";
-import Customer from "src/app/models/customer";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
@@ -85,19 +84,7 @@ export class CartPageComponent implements OnInit {
       if (result) {
         this.orderService
           .addOrder(
-            new Order(
-              null,
-              new Customer(
-                null,
-                result.name,
-                result.email,
-                result.phone,
-                result.address,
-                result.region
-              ),
-              this.cartService.getItems(),
-              null
-            )
+            null
           )
           .then(
             () => {

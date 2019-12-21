@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import Admin from "src/app/models/admin";
+import User from "src/app/models/user";
 import { UserService } from "src/app/controllers/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { MatTable } from "@angular/material/table";
@@ -16,7 +16,7 @@ import {
 })
 export class AdminPageComponent implements OnInit {
   @ViewChild("table", { static: false }) table: MatTable<any>;
-  public admins: Admin[] = [];
+  public admins: User[] = [];
   public columnsToDisplay: string[] = ["name", "phone", "email", "edit"];
 
   constructor(private userService: UserService, private dialog: MatDialog) {}
@@ -54,7 +54,7 @@ export class AdminPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.userService
-          .addUser(Admin.fromJSON(result), result.password)
+          .addUser(User.fromJSON(result), result.password)
           .then(admin => {
             this.admins.push(admin);
             this.table.renderRows();
@@ -65,7 +65,7 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  onUpdateAdmin(admin: Admin): void {
+  onUpdateAdmin(admin: User): void {
     const dialogRef = this.dialog.open(FormDialogComponent, {
       width: '600px',
       data: {
@@ -82,8 +82,8 @@ export class AdminPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (!result)
         return;
-      result['adminId'] = admin.getAdminId();
-      const newAdmin = Admin.fromJSON(result);
+      result['adminId'] = admin.getUserId();
+      const newAdmin = User.fromJSON(result);
       this.userService.updateUser(newAdmin).then((result) => {
         this.initAdmins();
       }, (error) => {
@@ -92,7 +92,7 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  onRemoveAdmin(admin: Admin): void {
+  onRemoveAdmin(admin: User): void {
     this.dialog
       .open(YesNoPopupComponent)
       .afterClosed()
@@ -101,7 +101,7 @@ export class AdminPageComponent implements OnInit {
         this.userService.removeUser(admin).then(
           () => {
             this.admins = this.admins.filter(value => {
-              return value.getAdminId() != admin.getAdminId();
+              return value.getUserId() != admin.getUserId();
             });
             this.table.renderRows();
           },

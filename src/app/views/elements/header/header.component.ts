@@ -3,7 +3,7 @@ import { CartService } from 'ng-shopping-cart';
 import ProductCartItem from 'src/app/models/cart-item';
 import Category from 'src/app/models/category';
 import { UserService } from 'src/app/controllers/user.service';
-import Admin from 'src/app/models/admin';
+import User from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/controllers/category.service';
 
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   public numberOfItems: number = 0;
   public categories: Category[] = [];
-  public admin: Admin = null;
+  public admin: User = null;
 
   constructor(
     private cartService: CartService<ProductCartItem>,

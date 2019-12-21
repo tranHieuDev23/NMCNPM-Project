@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import Admin from "../models/admin";
+import User from "../models/user";
 import { CookieService } from "ngx-cookie-service";
 import { APIS } from "../configs/api-endpoints";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from "rxjs";
 
 const ACCESS_TOKEN_COOKIE = "accessToken";
 
@@ -11,27 +11,30 @@ const ACCESS_TOKEN_COOKIE = "accessToken";
   providedIn: "root"
 })
 export class UserService {
-  public currentUser: BehaviorSubject<Admin> = new BehaviorSubject<Admin>(null);
+  public currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient, private cookie: CookieService) {
-    this.getLoggedInUser().then((result) => {
-      this.currentUser.next(result);
-    }, (error) => { 
-      console.log(error);
-    });
+    this.getLoggedInUser().then(
+      result => {
+        this.currentUser.next(result);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getAccessToken(): string {
-    return this.cookie.get(ACCESS_TOKEN_COOKIE);
+    return this.getAccessToken();
   }
 
-  login(username: string, password: string): Promise<Admin> {
+  login(username: string, password: string): Promise<User> {
     return new Promise((resolve, reject) => {
       this.http
         .post<any>(APIS.LOGIN_API, { username, password })
         .subscribe(
           result => {
-            const admin = Admin.fromJSON(result.admin);
+            const admin = User.fromJSON(result.admin);
             const accessToken = result.accessToken;
             this.cookie.set(ACCESS_TOKEN_COOKIE, accessToken);
             this.currentUser.next(admin);
@@ -46,7 +49,7 @@ export class UserService {
 
   logout(): Promise<any> {
     return new Promise((resolve, reject) => {
-      const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
+      const accessToken = this.getAccessToken();
       if (!accessToken) {
         reject("No access token found!");
         return;
@@ -65,15 +68,15 @@ export class UserService {
     });
   }
 
-  getLoggedInUser(): Promise<Admin> {
+  getLoggedInUser(): Promise<User> {
     return new Promise((resolve, reject) => {
-      const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
+      const accessToken = this.getAccessToken();
       if (accessToken) {
         this.http
           .post<any>(APIS.RETRIEVE_USER_API, { accessToken })
           .subscribe(
             (result: any) => {
-              const admin = Admin.fromJSON(result);
+              const admin = User.fromJSON(result);
               if (admin) {
                 resolve(admin);
               } else {
@@ -92,33 +95,36 @@ export class UserService {
   }
 
   isUserLoggedIn(): Promise<boolean> {
-    return new Promise<boolean>((resolve) => {
-      this.getLoggedInUser().then((result) => {
-        resolve(result != null);
-      }, (error) => {
-        console.log(error);
-        resolve(false);
-      });
+    return new Promise<boolean>(resolve => {
+      this.getLoggedInUser().then(
+        result => {
+          resolve(result != null);
+        },
+        error => {
+          console.log(error);
+          resolve(false);
+        }
+      );
     });
   }
 
-  getAllUSer(): Promise<Admin[]> {
+  getAllUSer(): Promise<User[]> {
     return new Promise((resolve, reject) => {
-      const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
+      const accessToken = this.getAccessToken();
       if (!accessToken) {
         reject("No access token found!");
         return;
       }
       this.http
-        .post<Admin[]>(APIS.RETRIEVE_USERS_API, { accessToken })
+        .post<User[]>(APIS.RETRIEVE_USERS_API, { accessToken })
         .toPromise()
         .then(
           result => {
-            const admins = [];
+            const users = [];
             result.forEach(element => {
-              admins.push(Admin.fromJSON(element));
+              users.push(User.fromJSON(element));
             });
-            resolve(admins);
+            resolve(users);
           },
           error => {
             reject(error);
@@ -127,20 +133,15 @@ export class UserService {
     });
   }
 
-  addUser(admin: Admin, password: string): Promise<Admin> {
+  addUser(user: User, password: string): Promise<User> {
     return new Promise((resolve, reject) => {
-      const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
-      if (!accessToken) {
-        reject("No access token found!");
-        return;
-      }
       this.http
-        .post<Admin>(APIS.ADD_USER_API, { admin, password, accessToken })
+        .post<User>(APIS.ADD_USER_API, { user, password })
         .toPromise()
         .then(
           result => {
-            const createdAdmin = Admin.fromJSON(result);
-            if (createdAdmin) resolve(createdAdmin);
+            const createdUser = User.fromJSON(result);
+            if (createdUser) resolve(createdUser);
             else reject("Error while deserialize response!");
           },
           error => {
@@ -150,18 +151,18 @@ export class UserService {
     });
   }
 
-  updateUser(admin: Admin): Promise<void> {
+  updateUser(user: User): Promise<void> {
     return new Promise((resolve, reject) => {
-      const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
+      const accessToken = this.getAccessToken();
       if (!accessToken) {
         reject("No access token found!");
         return;
       }
       this.http
-        .post<Admin>(APIS.UPDATE_USER_API, { admin, accessToken })
+        .post<User>(APIS.UPDATE_USER_API, { user, accessToken })
         .toPromise()
         .then(
-          result => {
+          () => {
             resolve();
           },
           error => {
@@ -171,15 +172,15 @@ export class UserService {
     });
   }
 
-  removeUser(admin: Admin): Promise<any> {
+  removeUser(user: User): Promise<any> {
     return new Promise((resolve, reject) => {
-      const accessToken = this.cookie.get(ACCESS_TOKEN_COOKIE);
+      const accessToken = this.getAccessToken();
       if (!accessToken) {
         reject("No access token found!");
         return;
       }
       this.http
-        .post<Admin>(APIS.REMOVE_USER_API, { admin, accessToken })
+        .post<User>(APIS.REMOVE_USER_API, { user: user, accessToken })
         .toPromise()
         .then(resolve, reject);
     });
