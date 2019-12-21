@@ -21,6 +21,9 @@ export class RouteLoginGuardService implements CanActivate {
     return new Promise<boolean | UrlTree>((resolve, reject) => {
       this.userService.isUserLoggedIn().then(result => {
         if (!result) {
+          this.router.navigate(["/login"], {queryParams: {
+            returnUrl: state.url
+          }});
           console.log("No user is logged in!");
           resolve(this.router.parseUrl("/"));
         } else resolve(true);
