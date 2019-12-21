@@ -12,7 +12,7 @@ export class OrderService {
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
-  public addOrder(order: Order): Promise<Object> {
+  public addOrder(order: Order): Promise<any> {
     return this.http
       .post(APIS.ADD_ORDER_API, {
         order

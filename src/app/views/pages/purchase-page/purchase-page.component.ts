@@ -15,7 +15,8 @@ import {
 import { MatStepper } from "@angular/material/stepper";
 import { StepperSelectionEvent } from "@angular/cdk/stepper";
 import { faMoneyBill, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import Order, { PaymentMethod } from "../../../models/order";
+import Order, { PaymentMethod, OrderStatus } from "../../../models/order";
+import { OrderService } from "src/app/controllers/order.service";
 
 const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
 
@@ -27,11 +28,16 @@ const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
 export class PurchasePageComponent implements OnInit {
   @ViewChild("stepper", { static: true }) stepper: MatStepper;
   public user: User;
+  public updatedUser: User;
   public billingInfoForm: FormGroup;
 
   public faMoneyBill = faMoneyBill;
   public faCreditCard = faCreditCard;
   public paymentMethod: PaymentMethod = PaymentMethod.CASH_ON_DELIVERY;
+  public paymentMethodStrings: string[] = [
+    "Thanh toán khi nhận hàng",
+    "Thanh toán chuyển khoản"
+  ];
 
   public items: ProductCartItem[] = [];
   public totalCost: number = 0;
@@ -42,7 +48,8 @@ export class PurchasePageComponent implements OnInit {
     private cartSerivce: CartService<ProductCartItem>,
     private router: Router,
     private snackbar: MatSnackBar,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private orderService: OrderService
   ) {
     this.billingInfoForm = this.formBuilder.group({
       nameFormControl: ["", Validators.required],
@@ -86,8 +93,19 @@ export class PurchasePageComponent implements OnInit {
     this.userService.getLoggedInUser().then(
       result => {
         this.user = result;
+        this.updatedUser = new User(
+          result.getUserId(),
+          result.getUsername(),
+          result.getName(),
+          result.getEmail(),
+          result.getPhone(),
+          result.getAddress(),
+          result.getCityRegion(),
+          result.getRole()
+        );
         this.initalizeBillingForm();
         this.items = this.cartSerivce.getItems();
+        console.log(this.items);
         this.totalCost = this.cartSerivce.cost();
       },
       error => {
@@ -150,8 +168,7 @@ export class PurchasePageComponent implements OnInit {
 
   onSubmitBillingForm(): void {
     if (this.billingInfoForm.invalid) return;
-    if (!this.isBillingFormChanged()) return;
-    this.user = new User(
+    this.updatedUser = new User(
       this.user.getUserId(),
       this.user.getUsername(),
       this.billingInfoForm.controls.nameFormControl.value.trim(),
@@ -166,5 +183,51 @@ export class PurchasePageComponent implements OnInit {
   onSetPaymentMethod(method: PaymentMethod): void {
     console.log(method);
     this.paymentMethod = method;
+  }
+
+  onPurchaseCompleted(): void {
+    if (this.isBillingFormChanged()) {
+      this.userService.updateUser(this.updatedUser).then(
+        () => {
+          this.makeOrder();
+        },
+        error => {
+          console.log(error);
+          this.snackbar.open(
+            "Có lỗi xảy ra trong quá trình cập nhật thông tin người dùng!",
+            null,
+            { duration: 3000 }
+          );
+        }
+      );
+    } else {
+      this.makeOrder();
+    }
+  }
+
+  makeOrder(): void {
+    const newOrder = new Order(
+      null,
+      this.updatedUser,
+      this.items,
+      this.paymentMethod,
+      OrderStatus.CONFIRMING
+    );
+    this.orderService.addOrder(newOrder).then(
+      result => {
+        this.snackbar.open(
+          "Tạo đơn hàng thành công! Chúng tôi sẽ sớm liên hệ với bạn.",
+          null,
+          { duration: 3000 }
+        );
+        this.router.navigateByUrl("/");
+      },
+      error => {
+        console.log(error);
+        this.snackbar.open("Có lỗi trong quá trình tạo đơn hàng!", null, {
+          duration: 3000
+        });
+      }
+    );
   }
 }

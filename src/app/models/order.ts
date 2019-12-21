@@ -52,6 +52,10 @@ class Order {
     return this.products;
   }
 
+  public getPaymentMethod(): PaymentMethod {
+    return this.paymentMethod;
+  }
+
   public getStatus(): OrderStatus {
     return this.status;
   }

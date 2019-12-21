@@ -19,7 +19,7 @@ export class OrderManagementComponent implements OnInit {
     "customerPhone",
     "customerEmail",
     "customerAddress",
-    "customerRegion",
+    "paymentMethod",
     "products",
     "status",
     "edit"
