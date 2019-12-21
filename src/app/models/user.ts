@@ -1,7 +1,7 @@
 enum UserRole {
   USER,
   ADMIN
-};
+}
 
 class User {
   constructor(
@@ -65,3 +65,5 @@ class User {
 }
 
 export default User;
+
+export { UserRole };

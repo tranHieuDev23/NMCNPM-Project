@@ -2,27 +2,30 @@
     <div fxLayout="column" fxLayoutAlign="space-between stretch" id="container">
         <h2 style="margin-left: auto; margin-right: auto;">Đăng ký tài khoản mới</h2>
         <mat-form-field>
-            <input type="text" required matInput class="input-field" placeholder="Họ và tên"
-                [(ngModel)]="retypedPassword">
+            <input type="text" matInput class="input-field" placeholder="Họ và tên" [formControl]="nameFormControl">
         </mat-form-field>
         <mat-form-field>
-            <input required matInput class="input-field" placeholder="Username" [(ngModel)]="username">
+            <input matInput class="input-field" placeholder="Username" [formControl]="usernameFormControl">
         </mat-form-field>
         <mat-form-field>
-            <input required type="password" matInput class="input-field" placeholder="Password" [(ngModel)]="password">
+            <input type="password" matInput class="input-field" placeholder="Password"
+                [formControl]="passwordFormControl">
+            <mat-error *ngIf="passwordFormControl.invalid">Phải có độ dài từ 8 kí tự trở lên, bao gồm chữ số, chữ viết hoa
+                và viết thường</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input required type="password" matInput class="input-field" placeholder="Nhập lại password"
-                [(ngModel)]="retypedPassword">
+            <input type="password" matInput class="input-field" placeholder="Nhập lại password"
+                [formControl]="retypedPasswordFormControl">
         </mat-form-field>
         <mat-form-field>
-            <input type="password" matInput class="input-field" placeholder="Email" [(ngModel)]="email">
+            <input type="email" matInput class="input-field" placeholder="Email" [formControl]="emailFormControl">
         </mat-form-field>
         <mat-form-field>
-            <input type="password" matInput class="input-field" placeholder="Số điện thoại" [(ngModel)]="phone">
+            <input type="tel" matInput class="input-field" placeholder="Số điện thoại"
+                [formControl]="phoneFormControl">
         </mat-form-field>
         <mat-form-field>
-            <input type="password" matInput class="input-field" placeholder="Địa chỉ" [(ngModel)]="address">
+            <input type="text" matInput class="input-field" placeholder="Địa chỉ" [(ngModel)]="address">
         </mat-form-field>
         <mat-form-field>
             <mat-select placeholder="Tỉnh thành" [(ngModel)]="cityRegion">
@@ -32,7 +35,7 @@
             </mat-select>
         </mat-form-field>
         <div style="margin-left: auto; margin-right: auto">
-            <button mat-stroked-button color="primary" style="margin-right: 4px;">Đăng ký</button>
+            <button mat-stroked-button color="primary" [disabled]="!isFormValid()" style="margin-right: 4px;" (click)="onSignUp()">Đăng ký</button>
             <button mat-stroked-button color="warn" routerLink="/login">Đăng nhập</button>
         </div>
     </div>

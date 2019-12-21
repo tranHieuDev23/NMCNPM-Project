@@ -33,7 +33,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CookieService } from "ngx-cookie-service";
 import { LoginPageComponent } from './views/pages/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPageComponent } from './views/pages/admin/admin.component';
 import { MatTableModule } from '@angular/material/table';
 import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
@@ -43,7 +43,7 @@ import { CategoryManagementComponent } from './views/pages/category-management/c
 import { OrderManagementComponent } from './views/pages/order-management/order-management.component';
 import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { SignupPageComponent } from './views/pages/signup/signup.component';
+import { SignUpPageComponent } from './views/pages/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,7 @@ import { SignupPageComponent } from './views/pages/signup/signup.component';
     CategoryManagementComponent,
     OrderManagementComponent,
     FormDialogComponent,
-    SignupPageComponent
+    SignUpPageComponent
   ],
   imports: [
     BrowserModule,
@@ -90,9 +90,10 @@ import { SignupPageComponent } from './views/pages/signup/signup.component';
     MatSelectModule,
     MatInputModule,
     MatSnackBarModule,
-    FormsModule,
     MatTableModule,
-    CKEditorModule
+    CKEditorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     CookieService

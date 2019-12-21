@@ -10,7 +10,7 @@ import { RouteLoginGuardService } from "./controllers/route-login-guard.service"
 import { RouteLogoutGuardService } from "./controllers/route-logout-guard.service";
 import { CategoryManagementComponent } from "./views/pages/category-management/category-management.component";
 import { OrderManagementComponent } from "./views/pages/order-management/order-management.component";
-import { SignupPageComponent } from './views/pages/signup/signup.component';
+import { SignUpPageComponent } from './views/pages/signup/signup.component';
 
 const appRoutes: Routes = [
   { path: "product/:product-id", component: ProductPageComponent },
@@ -24,7 +24,7 @@ const appRoutes: Routes = [
   {
     path: "signup",
     canActivate: [RouteLogoutGuardService],
-    component: SignupPageComponent
+    component: SignUpPageComponent
   },
   {
     path: "admin",
