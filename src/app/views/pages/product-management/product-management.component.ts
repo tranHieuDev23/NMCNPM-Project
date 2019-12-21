@@ -25,6 +25,7 @@ export class ProductManagementPageComponent implements OnInit {
     "name",
     "category",
     "price",
+    "quantity",
     "description",
     "image",
     "lastUpdate",
