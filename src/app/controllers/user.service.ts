@@ -25,7 +25,7 @@ export class UserService {
   }
 
   getAccessToken(): string {
-    return this.getAccessToken();
+    return this.cookie.get(ACCESS_TOKEN_COOKIE);
   }
 
   login(username: string, password: string): Promise<User> {
@@ -34,11 +34,11 @@ export class UserService {
         .post<any>(APIS.LOGIN_API, { username, password })
         .subscribe(
           result => {
-            const admin = User.fromJSON(result.admin);
+            const user = User.fromJSON(result.user);
             const accessToken = result.accessToken;
             this.cookie.set(ACCESS_TOKEN_COOKIE, accessToken);
-            this.currentUser.next(admin);
-            resolve(admin);
+            this.currentUser.next(user);
+            resolve(user);
           },
           error => {
             reject(error);
@@ -76,9 +76,9 @@ export class UserService {
           .post<any>(APIS.RETRIEVE_USER_API, { accessToken })
           .subscribe(
             (result: any) => {
-              const admin = User.fromJSON(result);
-              if (admin) {
-                resolve(admin);
+              const user = User.fromJSON(result);
+              if (user) {
+                resolve(user);
               } else {
                 reject("Error while deserialize response!");
               }

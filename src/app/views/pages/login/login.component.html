@@ -1,10 +1,15 @@
-<div fxLayout="column" fxLayoutAlign="space-between stretch" id="container">
-    <h2>Đăng nhập dành cho quản trị viên</h2>
-    <mat-form-field>
-        <input matInput class="input-field" placeholder="Username" [(ngModel)]="username">
-    </mat-form-field>
-    <mat-form-field>
-        <input type="password" matInput class="input-field" placeholder="Password" [(ngModel)]="password">
-    </mat-form-field>
-    <button mat-stroked-button (click)="onLogin()">Đăng nhập</button>
+<div class="login-background">
+    <div fxLayout="column" fxLayoutAlign="space-between stretch" id="container">
+        <h2 style="margin-left: auto; margin-right: auto;">Đăng nhập</h2>
+        <mat-form-field>
+            <input matInput class="input-field" placeholder="Username" [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput class="input-field" placeholder="Password" [(ngModel)]="password">
+        </mat-form-field>
+        <button mat-stroked-button color="primary" (click)="onLogin()">Đăng nhập</button>
+        <p style="margin-left: auto; margin-right: auto;">Chưa có tài khoản? <a routerLink="/signup">Tạo tài khoản
+                mới</a>
+            ngay hôm nay!</p>
+    </div>
 </div>

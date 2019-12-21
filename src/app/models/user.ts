@@ -52,14 +52,14 @@ class User {
       return null;
     }
     return new User(
-      data.adminId,
+      data.userId,
       data.username,
       data.name,
       data.email,
       data.phone,
       data.address,
       data.cityRegion,
-      data.userRole
+      data.role
     );
   }
 }

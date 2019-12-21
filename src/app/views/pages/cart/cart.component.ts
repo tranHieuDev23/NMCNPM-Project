@@ -7,7 +7,7 @@ import {
   FormControlItem,
   FormDialogComponent
 } from "../../elements/form-dialog/form-dialog.component";
-import { ALL_CITY_REGIONS } from "./regions";
+import { ALL_CITY_REGIONS } from "../../../configs/regions";
 import { OrderService } from "src/app/controllers/order.service";
 import Order from "src/app/models/order";
 import { MatSnackBar } from "@angular/material/snack-bar";

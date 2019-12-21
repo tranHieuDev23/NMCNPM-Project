@@ -1,0 +1,39 @@
+<div class="login-background">
+    <div fxLayout="column" fxLayoutAlign="space-between stretch" id="container">
+        <h2 style="margin-left: auto; margin-right: auto;">Đăng ký tài khoản mới</h2>
+        <mat-form-field>
+            <input type="text" required matInput class="input-field" placeholder="Họ và tên"
+                [(ngModel)]="retypedPassword">
+        </mat-form-field>
+        <mat-form-field>
+            <input required matInput class="input-field" placeholder="Username" [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field>
+            <input required type="password" matInput class="input-field" placeholder="Password" [(ngModel)]="password">
+        </mat-form-field>
+        <mat-form-field>
+            <input required type="password" matInput class="input-field" placeholder="Nhập lại password"
+                [(ngModel)]="retypedPassword">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput class="input-field" placeholder="Email" [(ngModel)]="email">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput class="input-field" placeholder="Số điện thoại" [(ngModel)]="phone">
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput class="input-field" placeholder="Địa chỉ" [(ngModel)]="address">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Tỉnh thành" [(ngModel)]="cityRegion">
+                <mat-option *ngFor="let option of allRegions; index as i" [value]="option">
+                    {{ option }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div style="margin-left: auto; margin-right: auto">
+            <button mat-stroked-button color="primary" style="margin-right: 4px;">Đăng ký</button>
+            <button mat-stroked-button color="warn" routerLink="/login">Đăng nhập</button>
+        </div>
+    </div>
+</div>

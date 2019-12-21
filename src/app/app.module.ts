@@ -43,6 +43,7 @@ import { CategoryManagementComponent } from './views/pages/category-management/c
 import { OrderManagementComponent } from './views/pages/order-management/order-management.component';
 import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SignupPageComponent } from './views/pages/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AdminSidebarComponent,
     CategoryManagementComponent,
     OrderManagementComponent,
-    FormDialogComponent
+    FormDialogComponent,
+    SignupPageComponent
   ],
   imports: [
     BrowserModule,
