@@ -32,21 +32,22 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { CookieService } from "ngx-cookie-service";
-import { LoginPageComponent } from './views/pages/login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminPageComponent } from './views/pages/admin/admin.component';
-import { MatTableModule } from '@angular/material/table';
-import { ProductManagementPageComponent } from './views/pages/product-management/product-management.component';
-import { YesNoPopupComponent } from './views/elements/yes-no-popup/yes-no-popup.component';
-import { AdminSidebarComponent } from './views/elements/admin-sidebar/admin-sidebar.component';
-import { CategoryManagementComponent } from './views/pages/category-management/category-management.component';
-import { OrderManagementComponent } from './views/pages/order-management/order-management.component';
-import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { SignUpPageComponent } from './views/pages/signup/signup.component';
-import { EditProfilePageComponent } from './views/pages/edit-profile-page/edit-profile-page.component';
-import { PurchasePageComponent } from './views/pages/purchase-page/purchase-page.component';
+import { LoginPageComponent } from "./views/pages/login/login.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AdminPageComponent } from "./views/pages/admin/admin.component";
+import { MatTableModule } from "@angular/material/table";
+import { ProductManagementPageComponent } from "./views/pages/product-management/product-management.component";
+import { YesNoPopupComponent } from "./views/elements/yes-no-popup/yes-no-popup.component";
+import { AdminSidebarComponent } from "./views/elements/admin-sidebar/admin-sidebar.component";
+import { CategoryManagementComponent } from "./views/pages/category-management/category-management.component";
+import { OrderManagementComponent } from "./views/pages/order-management/order-management.component";
+import { FormDialogComponent } from "./views/elements/form-dialog/form-dialog.component";
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
+import { SignUpPageComponent } from "./views/pages/signup/signup.component";
+import { EditProfilePageComponent } from "./views/pages/edit-profile-page/edit-profile-page.component";
+import { PurchasePageComponent } from "./views/pages/purchase-page/purchase-page.component";
 import { MatStepperModule } from "@angular/material/stepper";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -99,12 +100,16 @@ import { MatStepperModule } from "@angular/material/stepper";
     CKEditorModule,
     FormsModule,
     ReactiveFormsModule,
-    MatStepperModule
+    MatStepperModule,
+    FontAwesomeModule,
+    MatButtonToggleModule
   ],
-  providers: [
-    CookieService
-  ],
+  providers: [CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [OrderPopupComponent, YesNoPopupComponent, FormDialogComponent]
+  entryComponents: [
+    OrderPopupComponent,
+    YesNoPopupComponent,
+    FormDialogComponent
+  ]
 })
 export class AppModule {}

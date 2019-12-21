@@ -14,6 +14,8 @@ import {
 } from "@angular/forms";
 import { MatStepper } from "@angular/material/stepper";
 import { StepperSelectionEvent } from "@angular/cdk/stepper";
+import { faMoneyBill, faCreditCard } from "@fortawesome/free-solid-svg-icons";
+import Order, { PaymentMethod } from "../../../models/order";
 
 const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
 
@@ -26,6 +28,10 @@ export class PurchasePageComponent implements OnInit {
   @ViewChild("stepper", { static: true }) stepper: MatStepper;
   public user: User;
   public billingInfoForm: FormGroup;
+
+  public faMoneyBill = faMoneyBill;
+  public faCreditCard = faCreditCard;
+  public paymentMethod: PaymentMethod = PaymentMethod.CASH_ON_DELIVERY;
 
   public items: ProductCartItem[] = [];
   public totalCost: number = 0;
@@ -110,7 +116,6 @@ export class PurchasePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.stepper);
     this.initialize();
     this.stepper.selectionChange.subscribe((value: StepperSelectionEvent) => {
       if (value.previouslySelectedIndex == 0) {
@@ -156,5 +161,10 @@ export class PurchasePageComponent implements OnInit {
       this.user.getCityRegion(),
       this.user.getRole()
     );
+  }
+
+  onSetPaymentMethod(method: PaymentMethod): void {
+    console.log(method);
+    this.paymentMethod = method;
   }
 }

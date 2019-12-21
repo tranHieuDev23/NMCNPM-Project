@@ -78,4 +78,4 @@ class Order {
 
 export default Order;
 
-export { OrderStatus, getOrderStatusFromId };
+export { OrderStatus, getOrderStatusFromId, PaymentMethod };
