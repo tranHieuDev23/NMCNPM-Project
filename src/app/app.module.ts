@@ -44,6 +44,8 @@ import { OrderManagementComponent } from './views/pages/order-management/order-m
 import { FormDialogComponent } from './views/elements/form-dialog/form-dialog.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SignUpPageComponent } from './views/pages/signup/signup.component';
+import { EditProfilePageComponent } from './views/pages/edit-profile-page/edit-profile-page.component';
+import { PurchasePageComponent } from './views/pages/purchase-page/purchase-page.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { SignUpPageComponent } from './views/pages/signup/signup.component';
     CategoryManagementComponent,
     OrderManagementComponent,
     FormDialogComponent,
-    SignUpPageComponent
+    SignUpPageComponent,
+    EditProfilePageComponent,
+    PurchasePageComponent
   ],
   imports: [
     BrowserModule,

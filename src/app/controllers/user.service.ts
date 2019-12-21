@@ -80,6 +80,7 @@ export class UserService {
               if (user) {
                 resolve(user);
               } else {
+                this.cookie.delete(ACCESS_TOKEN_COOKIE);
                 reject("Error while deserialize response!");
               }
             },

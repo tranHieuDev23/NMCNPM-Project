@@ -10,8 +10,10 @@ import { RouteLoginGuardService } from "./controllers/route-login-guard.service"
 import { RouteLogoutGuardService } from "./controllers/route-logout-guard.service";
 import { CategoryManagementComponent } from "./views/pages/category-management/category-management.component";
 import { OrderManagementComponent } from "./views/pages/order-management/order-management.component";
-import { SignUpPageComponent } from './views/pages/signup/signup.component';
-import { RouteAdminGuardService } from './controllers/route-admin-guard.service';
+import { SignUpPageComponent } from "./views/pages/signup/signup.component";
+import { RouteAdminGuardService } from "./controllers/route-admin-guard.service";
+import { EditProfilePageComponent } from "./views/pages/edit-profile-page/edit-profile-page.component";
+import { PurchasePageComponent } from "./views/pages/purchase-page/purchase-page.component";
 
 const appRoutes: Routes = [
   { path: "product/:product-id", component: ProductPageComponent },
@@ -34,8 +36,18 @@ const appRoutes: Routes = [
       { path: "admins", component: AdminPageComponent },
       { path: "products", component: ProductManagementPageComponent },
       { path: "categories", component: CategoryManagementComponent },
-      { path: "orders", component: OrderManagementComponent },
+      { path: "orders", component: OrderManagementComponent }
     ]
+  },
+  {
+    path: "edit-profile",
+    canActivate: [RouteLoginGuardService],
+    component: EditProfilePageComponent
+  },
+  {
+    path: "purchase",
+    canActivate: [RouteLoginGuardService],
+    component: PurchasePageComponent
   },
   { path: "**", component: HomePageComponent }
 ];

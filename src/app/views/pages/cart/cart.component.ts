@@ -9,7 +9,6 @@ import {
 } from "../../elements/form-dialog/form-dialog.component";
 import { ALL_CITY_REGIONS } from "../../../configs/regions";
 import { OrderService } from "src/app/controllers/order.service";
-import Order from "src/app/models/order";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
@@ -59,57 +58,6 @@ export class CartPageComponent implements OnInit {
   }
 
   onConfirmPurchase() {
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      width: "600px",
-      data: {
-        title: "Điền thông tin để hoàn tất đơn hàng",
-        items: [
-          new FormControlItem({placeholder: "Tên", name: "name"}),
-          new FormControlItem({placeholder: "Email", type: "email", name: "email"}),
-          new FormControlItem({placeholder: "Số điện thoại", type: "tel", name: "phone"}),
-          new FormControlItem({placeholder: "Địa chỉ", name: "address"}),
-          new FormControlItem({
-            controlType: "select",
-            placeholder: "Tỉnh thành",
-            name: "region",
-            options: ALL_CITY_REGIONS
-          })
-        ],
-        completedText: "Mua hàng",
-        cancelText: "Hủy"
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.orderService
-          .addOrder(
-            null
-          )
-          .then(
-            () => {
-              this.cartService.clear();
-              this.router.navigateByUrl("/");
-              this.snackbar.open(
-                "Đơn hàng đã được tạo thành công! Chúng tôi sẽ sớm liên lạc lại với bạn",
-                null,
-                {
-                  duration: 3000
-                }
-              );
-            },
-            error => {
-              console.log(error);
-              this.snackbar.open(
-                "Có lỗi xảy ra trong quá trình tạo đơn hàng!",
-                null,
-                {
-                  duration: 3000
-                }
-              );
-            }
-          );
-      }
-    });
+    this.router.navigateByUrl("/purchase");
   }
 }

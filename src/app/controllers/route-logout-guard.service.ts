@@ -21,7 +21,7 @@ export class RouteLogoutGuardService {
       this.userService.isUserLoggedIn().then(result => {
         if (result) {
           console.log("User is logged in!");
-          resolve(this.router.parseUrl("/admin"));
+          resolve(this.router.parseUrl("/"));
         } else resolve(true);
       });
     });
