@@ -2,11 +2,9 @@ import { Component } from "@angular/core";
 import { ALL_CITY_REGIONS } from "../../../configs/regions";
 import { UserService } from "src/app/controllers/user.service";
 import User, { UserRole } from "src/app/models/user";
-import {
-  FormControl,
-  Validators,
-  AbstractControl
-} from "@angular/forms";
+import { FormControl, Validators, AbstractControl } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
@@ -17,12 +15,15 @@ const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
   styleUrls: ["./signup.component.scss"]
 })
 export class SignUpPageComponent {
-  public address: string;
-  public cityRegion: string;
-  
+  public address: string = "";
+  public cityRegion: string = "";
+
   public nameFormControl = new FormControl("", [Validators.required]);
   public usernameFormControl = new FormControl("", [Validators.required]);
-  public passwordFormControl = new FormControl("", [Validators.required, Validators.pattern(PASSWORD_REGEX)]);
+  public passwordFormControl = new FormControl("", [
+    Validators.required,
+    Validators.pattern(PASSWORD_REGEX)
+  ]);
   public retypedPasswordFormControl = new FormControl("", [
     Validators.required,
     (control: AbstractControl) => {
@@ -30,7 +31,9 @@ export class SignUpPageComponent {
     }
   ]);
   public emailFormControl = new FormControl("", [Validators.email]);
-  public phoneFormControl = new FormControl("", [Validators.pattern(PHONE_REGEX)]);
+  public phoneFormControl = new FormControl("", [
+    Validators.pattern(PHONE_REGEX)
+  ]);
 
   public allFormControl: FormControl[] = [
     this.nameFormControl,
@@ -43,23 +46,25 @@ export class SignUpPageComponent {
 
   public allRegions: string[] = ALL_CITY_REGIONS;
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) {
     this.passwordFormControl.valueChanges.subscribe(() => {
       this.retypedPasswordFormControl.updateValueAndValidity();
     });
   }
 
   isFormValid(): boolean {
-    for(let i = 0; i < this.allFormControl.length; i ++) {
-      if (!this.allFormControl[i].valid)
-        return false;
+    for (let i = 0; i < this.allFormControl.length; i++) {
+      if (!this.allFormControl[i].valid) return false;
     }
     return true;
   }
 
   onSignUp(): void {
-    if (!this.isFormValid())
-      return;
+    if (!this.isFormValid()) return;
     const newUser: User = new User(
       null,
       this.usernameFormControl.value,
@@ -71,6 +76,30 @@ export class SignUpPageComponent {
       UserRole.USER
     );
     const password: string = this.passwordFormControl.value;
-    console.log(newUser, password);
+    this.userService.addUser(newUser, password).then(
+      user => {
+        this.userService.login(user.getUsername(), password).then(
+          () => {
+            this.router.navigateByUrl("/");
+          },
+          error => {
+            console.log(error);
+            this.snackbar.open(
+              "Có lỗi xảy ra trong quá trình đăng nhập!",
+              null,
+              {
+                duration: 3000
+              }
+            );
+          }
+        );
+      },
+      error => {
+        console.log(error);
+        this.snackbar.open("Có lỗi xảy ra trong quá trình đăng nhập!", null, {
+          duration: 3000
+        });
+      }
+    );
   }
 }

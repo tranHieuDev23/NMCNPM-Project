@@ -1,9 +1,7 @@
 <div class="login-background">
     <div fxLayout="column" fxLayoutAlign="space-between stretch" id="container">
         <h2 style="margin-left: auto; margin-right: auto;">Đăng ký tài khoản mới</h2>
-        <mat-form-field>
-            <input type="text" matInput class="input-field" placeholder="Họ và tên" [formControl]="nameFormControl">
-        </mat-form-field>
+        <h4>Thông tin tài khoản</h4>
         <mat-form-field>
             <input matInput class="input-field" placeholder="Username" [formControl]="usernameFormControl">
         </mat-form-field>
@@ -16,6 +14,10 @@
         <mat-form-field>
             <input type="password" matInput class="input-field" placeholder="Nhập lại password"
                 [formControl]="retypedPasswordFormControl">
+        </mat-form-field>
+        <h4>Thông tin cá nhân</h4>
+        <mat-form-field>
+            <input type="text" matInput class="input-field" placeholder="Họ và tên" [formControl]="nameFormControl">
         </mat-form-field>
         <mat-form-field>
             <input type="email" matInput class="input-field" placeholder="Email" [formControl]="emailFormControl">

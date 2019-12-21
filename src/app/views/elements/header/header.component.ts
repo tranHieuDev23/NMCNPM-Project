@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   public numberOfItems: number = 0;
   public categories: Category[] = [];
-  public admin: User = null;
+  public user: User = null;
 
   constructor(
     private cartService: CartService<ProductCartItem>,
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {
     this.userService.currentUser.subscribe((result) => {
-      this.admin = result;
+      this.user = result;
     });
   }
 
