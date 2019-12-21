@@ -10,7 +10,8 @@
             <div fxFlex="80%" style="padding-left: 24px">
                 <h2>{{ product.getName() }}</h2>
                 <p>{{ product.getDescription() }}</p>
-                <p>{{ product.getPrice() }} VND</p>
+                <p class="price-text">{{ product.getPrice() | numberFormatter }} ₫</p>
+                <p>Số lượng còn lại: {{ product.getQuantity() }}</p>
                 <a mat-raised-button (click)="openDialog()">Mua ngay</a>
             </div>
         </div>

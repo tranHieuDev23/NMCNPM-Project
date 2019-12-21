@@ -49,6 +49,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { HistoryPageComponent } from './views/pages/history-page/history-page.component';
 import { EditProfileDialogComponent } from './views/elements/edit-profile-dialog/edit-profile-dialog.component';
+import { NumberFormatterPipe } from './views/pipes/number-formatter/number-formatter.pipe';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { EditProfileDialogComponent } from './views/elements/edit-profile-dialog
     SignUpPageComponent,
     PurchasePageComponent,
     HistoryPageComponent,
-    EditProfileDialogComponent
+    EditProfileDialogComponent,
+    NumberFormatterPipe
   ],
   imports: [
     BrowserModule,

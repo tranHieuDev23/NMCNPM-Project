@@ -55,8 +55,10 @@ export class OrderManagementComponent implements OnInit {
     );
   }
 
-  getOrderStatusString(status: OrderStatus): string {
-    return getOrderStatusString(status);
+  getOrderStatusString(order: Order): string {
+    if (!order.getRestocking())
+      return getOrderStatusString(order.getStatus());
+    return getOrderStatusString(order.getStatus()) + " (tạm hết hàng)";
   }
 
   getPaymentMethodString(method: PaymentMethod): string {
@@ -73,7 +75,7 @@ export class OrderManagementComponent implements OnInit {
   getNextOrderStatusString(status: OrderStatus): string {
     const nextId: number = status + 1;
     const nextStatus: OrderStatus = getOrderStatusFromId(nextId);
-    return `Sang trạng thái ${this.getOrderStatusString(nextStatus)}`
+    return `Sang trạng thái ${getOrderStatusString(nextStatus)}`
   }
 
   onSetOrderStatus(order: Order, newStatus: OrderStatus) {

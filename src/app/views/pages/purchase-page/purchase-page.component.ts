@@ -213,7 +213,8 @@ export class PurchasePageComponent implements OnInit {
       this.updatedUser,
       this.items,
       this.paymentMethod,
-      OrderStatus.CONFIRMING
+      OrderStatus.CONFIRMING,
+      null
     );
     this.orderService.addOrder(newOrder).then(
       result => {

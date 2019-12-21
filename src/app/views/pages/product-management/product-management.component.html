@@ -20,7 +20,7 @@
             </ng-container>
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef> Giá </th>
-                <td mat-cell *matCellDef="let product"> {{product.getPrice()}} </td>
+                <td mat-cell *matCellDef="let product"> {{product.getPrice() | numberFormatter}} ₫</td>
             </ng-container>
             <ng-container matColumnDef="description">
                 <th mat-header-cell *matHeaderCellDef> Mô tả </th>

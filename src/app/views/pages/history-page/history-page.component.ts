@@ -56,8 +56,10 @@ export class HistoryPageComponent implements OnInit {
     );
   }
 
-  getOrderStatusString(status: OrderStatus): string {
-    return getOrderStatusString(status);
+  getOrderStatusString(order: Order): string {
+    if (!order.getRestocking())
+      return getOrderStatusString(order.getStatus());
+    return getOrderStatusString(order.getStatus()) + " (tạm hết hàng)";
   }
 
   getPaymentMethodString(method: PaymentMethod): string {

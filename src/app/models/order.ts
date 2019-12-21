@@ -65,7 +65,8 @@ class Order {
     private orderedUser: User,
     private products: ProductCartItem[],
     private paymentMethod: PaymentMethod,
-    private status: OrderStatus
+    private status: OrderStatus,
+    private restocking: boolean
   ) {}
 
   public getOrderId(): number {
@@ -88,6 +89,10 @@ class Order {
     return this.status;
   }
 
+  public getRestocking(): boolean {
+    return this.restocking;
+  }
+
   static fromJSON(data: any): Order {
     if (data == null || data == undefined) return null;
     const result = new Order(
@@ -97,7 +102,10 @@ class Order {
       data.paymentMethod,
       data.status != null && data.status != undefined
         ? getOrderStatusFromId(data.status)
-        : null
+        : null,
+      data.restocking != null && data.restocking != undefined
+        ? data.restocking
+        : false
     );
     if (data.products) {
       data.products.forEach(element => {
