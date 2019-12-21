@@ -1,1 +1,36 @@
-<p>purchase-page works!</p>
+<div class="content">
+    <h2>Thanh toán</h2>
+    <mat-horizontal-stepper linear labelPosition="bottom">
+        <mat-step [stepControl]="billingInfoForm">
+            <ng-template matStepLabel>Thông tin người mua</ng-template>
+            <form [formGroup]="billingInfoForm" fxLayout="column" fxLayoutAlign="space-between stretch">
+                <mat-form-field>
+                    <input type="text" matInput class="input-field" placeholder="Họ và tên"
+                        formControlName="nameFormControl">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="email" matInput class="input-field" placeholder="Email"
+                        formControlName="emailFormControl">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="tel" matInput class="input-field" placeholder="Số điện thoại"
+                        formControlName="phoneFormControl">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput class="input-field" placeholder="Địa chỉ"
+                        formControlName="addressFormControl">
+                </mat-form-field>
+            </form>
+            <div>
+                <button mat-stroked-button color="warn" routerLink="/cart" style="margin-right: 4px;">Về giỏ hàng</button>
+                <button mat-stroked-button color="primary" matStepperNext (click)="onSubmitBillingForm()">Phương thức thanh toán</button>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="paymentMethodForm">
+            <ng-template matStepLabel>Phương thức thanh toán</ng-template>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Tổng kết</ng-template>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

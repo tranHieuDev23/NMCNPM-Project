@@ -46,6 +46,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SignUpPageComponent } from './views/pages/signup/signup.component';
 import { EditProfilePageComponent } from './views/pages/edit-profile-page/edit-profile-page.component';
 import { PurchasePageComponent } from './views/pages/purchase-page/purchase-page.component';
+import { MatStepperModule } from "@angular/material/stepper";
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { PurchasePageComponent } from './views/pages/purchase-page/purchase-page
     MatTableModule,
     CKEditorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule
   ],
   providers: [
     CookieService
