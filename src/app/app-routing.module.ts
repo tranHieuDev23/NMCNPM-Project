@@ -12,7 +12,6 @@ import { CategoryManagementComponent } from "./views/pages/category-management/c
 import { OrderManagementComponent } from "./views/pages/order-management/order-management.component";
 import { SignUpPageComponent } from "./views/pages/signup/signup.component";
 import { RouteAdminGuardService } from "./controllers/route-admin-guard.service";
-import { EditProfilePageComponent } from "./views/pages/edit-profile-page/edit-profile-page.component";
 import { PurchasePageComponent } from "./views/pages/purchase-page/purchase-page.component";
 import { HistoryPageComponent } from './views/pages/history-page/history-page.component';
 
@@ -39,11 +38,6 @@ const appRoutes: Routes = [
       { path: "categories", component: CategoryManagementComponent },
       { path: "orders", component: OrderManagementComponent }
     ]
-  },
-  {
-    path: "edit-profile",
-    canActivate: [RouteLoginGuardService],
-    component: EditProfilePageComponent
   },
   {
     path: "purchase",

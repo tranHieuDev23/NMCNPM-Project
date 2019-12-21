@@ -17,7 +17,7 @@
             <button mat-menu-item routerLink="/history">
                 Lịch sử mua hàng
             </button>
-            <button mat-menu-item routerLink="/edit-profile">
+            <button mat-menu-item (click)="onEditProfile()">
                 Chỉnh sửa thông tin tài khoản
             </button>
             <button mat-menu-item (click)="onLogout()">

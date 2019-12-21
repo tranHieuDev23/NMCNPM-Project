@@ -44,11 +44,11 @@ import { OrderManagementComponent } from "./views/pages/order-management/order-m
 import { FormDialogComponent } from "./views/elements/form-dialog/form-dialog.component";
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { SignUpPageComponent } from "./views/pages/signup/signup.component";
-import { EditProfilePageComponent } from "./views/pages/edit-profile-page/edit-profile-page.component";
 import { PurchasePageComponent } from "./views/pages/purchase-page/purchase-page.component";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { HistoryPageComponent } from './views/pages/history-page/history-page.component';
+import { EditProfileDialogComponent } from './views/elements/edit-profile-dialog/edit-profile-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,9 +70,9 @@ import { HistoryPageComponent } from './views/pages/history-page/history-page.co
     OrderManagementComponent,
     FormDialogComponent,
     SignUpPageComponent,
-    EditProfilePageComponent,
     PurchasePageComponent,
-    HistoryPageComponent
+    HistoryPageComponent,
+    EditProfileDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +111,8 @@ import { HistoryPageComponent } from './views/pages/history-page/history-page.co
   entryComponents: [
     OrderPopupComponent,
     YesNoPopupComponent,
-    FormDialogComponent
+    FormDialogComponent,
+    EditProfileDialogComponent
   ]
 })
 export class AppModule {}

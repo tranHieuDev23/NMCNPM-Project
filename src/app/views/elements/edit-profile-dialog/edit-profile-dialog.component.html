@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutAlign="space-between stretch">
+    <h2 style="margin-left: auto; margin-right: auto;">Chỉnh sửa thông tin tài khoản</h2>
+    <h4>Thông tin tài khoản</h4>
+    <mat-form-field>
+        <input matInput class="input-field" placeholder="Username" [formControl]="usernameFormControl">
+    </mat-form-field>
+    <mat-form-field>
+        <input type="password" matInput class="input-field" placeholder="Password mới (để trống để giữ nguyên)" [formControl]="passwordFormControl">
+        <mat-error *ngIf="passwordFormControl.invalid">Phải có độ dài từ 8 kí tự trở lên, bao gồm chữ số, chữ viết hoa
+            và viết thường</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="isUpdatingPassword()">
+        <input type="password" matInput class="input-field" placeholder="Nhập lại password cũ"
+            [formControl]="retypedPasswordFormControl">
+    </mat-form-field>
+    <h4>Thông tin cá nhân</h4>
+    <mat-form-field>
+        <input type="text" matInput class="input-field" placeholder="Họ và tên" [formControl]="nameFormControl">
+    </mat-form-field>
+    <mat-form-field>
+        <input type="email" matInput class="input-field" placeholder="Email" [formControl]="emailFormControl">
+    </mat-form-field>
+    <mat-form-field>
+        <input type="tel" matInput class="input-field" placeholder="Số điện thoại" [formControl]="phoneFormControl">
+    </mat-form-field>
+    <mat-form-field>
+        <input type="text" matInput class="input-field" placeholder="Địa chỉ" [formControl]="addressFormControl">
+    </mat-form-field>
+    <div style="margin-left: auto; margin-right: auto">
+        <button mat-stroked-button color="primary" [disabled]="!isFormValid()" style="margin-right: 4px;"
+            (click)="onUpdateProfile()">Hoàn tất</button>
+        <button mat-stroked-button color="warn" (click)="onCancel()">Hủy bỏ</button>
+    </div>
+</div>

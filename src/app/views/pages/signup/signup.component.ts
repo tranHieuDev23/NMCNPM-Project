@@ -16,7 +16,6 @@ const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
 })
 export class SignUpPageComponent {
   public address: string = "";
-  public cityRegion: string = "";
 
   public nameFormControl = new FormControl("", [Validators.required]);
   public usernameFormControl = new FormControl("", [Validators.required]);

@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import User from "../models/user";
+import User, { UserRole } from "../models/user";
 import { CookieService } from "ngx-cookie-service";
 import { APIS } from "../configs/api-endpoints";
 
@@ -10,7 +10,8 @@ const ACCESS_TOKEN_COOKIE = "accessToken";
   providedIn: "root"
 })
 export class UserService {
-  public currentUserChanged: EventEmitter<User> = new EventEmitter<User>(null);
+  public currentUserChanged: EventEmitter<User> = new EventEmitter<User>();
+  public currentUserUpdated: EventEmitter<User> = new EventEmitter<User>();
   private currentUser: User = null;
 
   constructor(private http: HttpClient, private cookie: CookieService) {
@@ -118,7 +119,7 @@ export class UserService {
     });
   }
 
-  getAllUser(): Promise<User[]> {
+  getAllUser(role: UserRole = null): Promise<User[]> {
     return new Promise((resolve, reject) => {
       const accessToken = this.getAccessToken();
       if (!accessToken) {
@@ -126,7 +127,7 @@ export class UserService {
         return;
       }
       this.http
-        .post<User[]>(APIS.RETRIEVE_USERS_API, { accessToken })
+        .post<User[]>(APIS.RETRIEVE_USERS_API, { accessToken, role })
         .toPromise()
         .then(
           result => {
@@ -161,7 +162,7 @@ export class UserService {
     });
   }
 
-  updateUser(user: User): Promise<void> {
+  updateUser(user: User, newPassword: string = null, oldPassword: string = null): Promise<void> {
     return new Promise((resolve, reject) => {
       const accessToken = this.getAccessToken();
       if (!accessToken) {
@@ -169,7 +170,7 @@ export class UserService {
         return;
       }
       this.http
-        .post<User>(APIS.UPDATE_USER_API, { user, accessToken })
+        .post<User>(APIS.UPDATE_USER_API, { user, newPassword, oldPassword, accessToken })
         .toPromise()
         .then(
           () => {
