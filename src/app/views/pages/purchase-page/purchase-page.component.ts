@@ -218,6 +218,7 @@ export class PurchasePageComponent implements OnInit {
           null,
           { duration: 3000 }
         );
+        this.cartSerivce.clear();
         this.router.navigateByUrl("/");
       },
       error => {

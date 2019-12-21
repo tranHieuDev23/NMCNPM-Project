@@ -33,7 +33,7 @@
                         <mat-list-item *ngFor="let product of order.getProducts()">
                             <a routerLink="/product/{{ product.getId() }}">
                                 {{ product.getName() }}
-                            </a> - Số lượng {{ product.getQuantity() }}
+                            </a> - ({{ product.getQuantity() }})
                         </mat-list-item>
                     </mat-list>
                 </td>
