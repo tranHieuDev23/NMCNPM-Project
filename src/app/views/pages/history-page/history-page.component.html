@@ -1,0 +1,37 @@
+<div class="content">
+    <h2>Lịch sử mua hàng</h2>
+
+    <table #table mat-table [dataSource]="orders" style="margin-bottom: 1.5rem;">
+        <ng-container matColumnDef="products">
+            <th mat-header-cell *matHeaderCellDef> Mặt hàng đã đặt </th>
+            <td mat-cell *matCellDef="let order">
+                <mat-list dense>
+                    <mat-list-item *ngFor="let product of order.getProducts()">
+                        <a routerLink="/product/{{ product.getId() }}">
+                            {{ product.getName() }}
+                        </a> ({{ product.getQuantity() }})
+                    </mat-list-item>
+                </mat-list>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="paymentMethod">
+            <th mat-header-cell *matHeaderCellDef> Phương thức thanh toán </th>
+            <td mat-cell *matCellDef="let order"> {{ order.getPaymentMethod() }} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+            <td mat-cell *matCellDef="let order">
+                {{ getOrderStatusString(order.getStatus()) }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Tùy chọn </th>
+            <td mat-cell *matCellDef="let order">
+                <button *ngIf="isIncompletedOrder(order)" mat-stroked-button color="warn"
+                    (click)="onCancelOrder(order)">Hủy đơn hàng</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+</div>

@@ -1,24 +1,22 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { OrderService } from "src/app/controllers/order.service";
 import Order, { OrderStatus, getOrderStatusFromId } from "src/app/models/order";
-import { MatTable } from "@angular/material/table";
-import { MatDialog } from "@angular/material/dialog";
 import { YesNoPopupComponent } from "../../elements/yes-no-popup/yes-no-popup.component";
+import { MatDialog } from "@angular/material/dialog";
+import { OrderService } from "src/app/controllers/order.service";
+import { MatTable } from "@angular/material/table";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { UserService } from "src/app/controllers/user.service";
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-order-management",
-  templateUrl: "./order-management.component.html",
-  styleUrls: ["./order-management.component.scss"]
+  selector: "app-history-page",
+  templateUrl: "./history-page.component.html",
+  styleUrls: ["./history-page.component.scss"]
 })
-export class OrderManagementComponent implements OnInit {
+export class HistoryPageComponent implements OnInit {
   @ViewChild("table", { static: false }) table: MatTable<any>;
   public orders: Order[] = [];
   public columnsToDisplay: string[] = [
-    "customerName",
-    "customerPhone",
-    "customerEmail",
-    "customerAddress",
     "products",
     "paymentMethod",
     "status",
@@ -26,31 +24,34 @@ export class OrderManagementComponent implements OnInit {
   ];
 
   constructor(
+    private userService: UserService,
     private orderService: OrderService,
+    private router: Router,
     private dialog: MatDialog,
     private snackbar: MatSnackBar
   ) {}
 
-  ngOnInit() {
-    this.initOrders();
-    this.orderService.onOrdersUpdated.subscribe(
-      () => {
-        this.initOrders();
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-
   initOrders() {
-    this.orderService.retrieveAllOrder().then(
+    this.userService.getLoggedInUser().then(
       result => {
-        this.orders = result;
-        this.table.renderRows();
+        this.orderService.retrieveAllOrderOfUser(result).then(
+          result => {
+            this.orders = result;
+            this.table.renderRows();
+          },
+          error => {
+            console.log(error);
+          }
+        );
       },
       error => {
         console.log(error);
+        this.snackbar.open(
+          "Có vấn đề trong quá trình xác thực thông tin đăng nhập!",
+          null,
+          { duration: 3000 }
+        );
+        this.router.navigateByUrl("/");
       }
     );
   }
@@ -72,17 +73,15 @@ export class OrderManagementComponent implements OnInit {
     }
   }
 
+  ngOnInit() {
+    this.initOrders();
+  }
+
   isIncompletedOrder(order: Order): boolean {
     return (
       order.getStatus() != OrderStatus.DONE &&
       order.getStatus() != OrderStatus.CANCELLED
     );
-  }
-
-  getNextOrderStatusString(status: OrderStatus): string {
-    const nextId: number = status + 1;
-    const nextStatus: OrderStatus = getOrderStatusFromId(nextId);
-    return `Sang trạng thái ${this.getOrderStatusString(nextStatus)}`
   }
 
   onSetOrderStatus(order: Order, newStatus: OrderStatus) {
@@ -126,20 +125,5 @@ export class OrderManagementComponent implements OnInit {
       return;
     }
     this.onSetOrderStatus(order, OrderStatus.CANCELLED);
-  }
-
-  onRemoveOrder(order: Order) {
-    this.dialog
-      .open(YesNoPopupComponent)
-      .afterClosed()
-      .subscribe(result => {
-        if (!result) return;
-        this.orderService.removeOrder(order).then(
-          () => {},
-          error => {
-            console.log(error);
-          }
-        );
-      });
   }
 }

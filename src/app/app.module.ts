@@ -48,6 +48,7 @@ import { EditProfilePageComponent } from "./views/pages/edit-profile-page/edit-p
 import { PurchasePageComponent } from "./views/pages/purchase-page/purchase-page.component";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { HistoryPageComponent } from './views/pages/history-page/history-page.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
     FormDialogComponent,
     SignUpPageComponent,
     EditProfilePageComponent,
-    PurchasePageComponent
+    PurchasePageComponent,
+    HistoryPageComponent
   ],
   imports: [
     BrowserModule,

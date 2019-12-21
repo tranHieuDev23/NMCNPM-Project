@@ -3,6 +3,7 @@ import Order, { OrderStatus } from "../models/order";
 import { HttpClient } from "@angular/common/http";
 import { APIS } from "../configs/api-endpoints";
 import { UserService } from "./user.service";
+import User from "../models/user";
 
 @Injectable({
   providedIn: "root"
@@ -13,16 +14,28 @@ export class OrderService {
   constructor(private http: HttpClient, private userService: UserService) {}
 
   public addOrder(order: Order): Promise<any> {
-    return this.http
-      .post(APIS.ADD_ORDER_API, {
-        order
-      })
-      .toPromise();
+    return new Promise((resolve, reject) => {
+      const accessToken = this.userService.getAccessToken();
+      if (!accessToken) {
+        reject("No access token was found!");
+        return;
+      }
+      return this.http
+        .post(APIS.ADD_ORDER_API, {
+          accessToken,
+          order
+        })
+        .subscribe(resolve, reject);
+    });
   }
 
   public retrieveAllOrder(): Promise<Order[]> {
     return new Promise((resolve, reject) => {
       const accessToken = this.userService.getAccessToken();
+      if (!accessToken) {
+        reject("No access token was found!");
+        return;
+      }
       this.http
         .post<any[]>(APIS.RETRIEVE_ORDERS_API, { accessToken })
         .toPromise()
@@ -41,18 +54,51 @@ export class OrderService {
     });
   }
 
-  public updateOrderStatus(order: Order, nextStatus: OrderStatus): Promise<any> {
+  public retrieveAllOrderOfUser(user: User): Promise<Order[]> {
     return new Promise((resolve, reject) => {
       const accessToken = this.userService.getAccessToken();
       if (!accessToken) {
         reject("No access token was found!");
         return;
       }
-      this.http.post(APIS.UPDATE_ORDER_STATUS_API, {
-        orderId: order.getOrderId(),
-        nextStatus,
-        accessToken
-      }).subscribe(resolve, reject);
+      this.http
+        .post<any[]>(APIS.RETRIEVE_ORDERS_API, {
+          accessToken,
+          userId: user.getUserId()
+        })
+        .toPromise()
+        .then(
+          result => {
+            const orders: Order[] = [];
+            result.forEach(element => {
+              orders.push(Order.fromJSON(element));
+            });
+            resolve(orders);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  }
+
+  public updateOrderStatus(
+    order: Order,
+    nextStatus: OrderStatus
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const accessToken = this.userService.getAccessToken();
+      if (!accessToken) {
+        reject("No access token was found!");
+        return;
+      }
+      this.http
+        .post(APIS.UPDATE_ORDER_STATUS_API, {
+          orderId: order.getOrderId(),
+          nextStatus,
+          accessToken
+        })
+        .subscribe(resolve, reject);
     });
   }
 
@@ -60,7 +106,10 @@ export class OrderService {
     return new Promise((resolve, reject) => {
       const accessToken = this.userService.getAccessToken();
       this.http
-        .post(APIS.REMOVE_ORDER_API, { accessToken, orderId: order.getOrderId() })
+        .post(APIS.REMOVE_ORDER_API, {
+          accessToken,
+          orderId: order.getOrderId()
+        })
         .subscribe(() => {
           this.onOrdersUpdated.emit();
           resolve();

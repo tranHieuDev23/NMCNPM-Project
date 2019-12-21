@@ -14,6 +14,9 @@
         <a *ngIf="user.getRole() == 1" mat-button routerLink="/admin/admins">Giao diện quản trị viên</a>
         <a mat-button [matMenuTriggerFor]="adminMenu" color="white">{{ user.getUsername() }}</a>
         <mat-menu #adminMenu="matMenu">
+            <button mat-menu-item routerLink="/history">
+                Lịch sử mua hàng
+            </button>
             <button mat-menu-item routerLink="/edit-profile">
                 Chỉnh sửa thông tin tài khoản
             </button>
