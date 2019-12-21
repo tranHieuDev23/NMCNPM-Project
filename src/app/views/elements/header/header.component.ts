@@ -9,6 +9,10 @@ import { CategoryService } from "src/app/controllers/category.service";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { EditProfileDialogComponent } from "../edit-profile-dialog/edit-profile-dialog.component";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FormControl } from '@angular/forms';
+import { ProductService } from 'src/app/controllers/product.service';
+import Product from 'src/app/models/product';
 
 @Component({
   selector: "app-header",
@@ -19,16 +23,21 @@ export class HeaderComponent implements OnInit {
   public numberOfItems: number = 0;
   public categories: Category[] = [];
   public user: User = null;
+  public faSearch = faSearch;
+  public searchFormControl: FormControl = new FormControl("");
+  private countOccurance: number = 0;
+  public searchResults: Product[] = [];
 
   constructor(
     private cartService: CartService<ProductCartItem>,
     private categoryService: CategoryService,
+    private productService: ProductService,
     private userService: UserService,
     private router: Router,
     private dialog: MatDialog,
     private snackbar: MatSnackBar
   ) {
-    this.userService.currentUserChanged.subscribe(result => {
+    this.userService.currentUserChanged.subscribe((result: User) => {
       this.user = result;
     });
   }
@@ -41,6 +50,9 @@ export class HeaderComponent implements OnInit {
     });
     this.cartService.onItemsChanged.subscribe(() => {
       this.initItemsCount();
+    });
+    this.searchFormControl.valueChanges.subscribe((value) => {
+      this.onQueryChanged(value);
     });
   }
 
@@ -57,6 +69,26 @@ export class HeaderComponent implements OnInit {
 
   initItemsCount() {
     this.numberOfItems = this.cartService.getItems().length;
+  }
+
+  onQueryChanged(query: string): void {
+    this.countOccurance ++;
+    setTimeout(() => {
+      this.countOccurance --;
+      if (this.countOccurance == 0) {
+        console.log(query);
+        if (query == "") {
+          this.searchResults = [];
+          return;
+        }
+        this.productService.searchProducts(query).then((result) => {
+          console.log(result);
+          this.searchResults = result;
+        }, (error) => {
+          console.log(error);
+        });
+      }
+    }, 200);
   }
 
   onLogout(): void {

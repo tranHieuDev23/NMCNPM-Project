@@ -8,6 +8,20 @@
     </mat-menu>
     <a mat-button color="white" [matBadgeHidden]="numberOfItems == 0" [matBadge]="numberOfItems"
         matBadgePosition="after" matBadgeColor="warn" routerLink="/cart" matBadgeSize="small">Giỏ hàng</a>
+    <mat-form-field style="width: 250px; padding: 16px;">
+        <span matPrefix style="margin-right: 4px;">
+            <fa-icon size="xs" [icon]="faSearch"></fa-icon>
+        </span>
+        <input matInput [formControl]="searchFormControl" [matAutocomplete]="auto" style="font-size: 1rem;">
+        <mat-autocomplete #auto="matAutocomplete" panelWidth="500px">
+            <mat-option *ngFor="let item of searchResults" [value]="item.getName()" class="option"
+                routerLink="/product/{{ item.getProductId() }}">
+                <img class="option-img" aria-hidden [src]="item.getImage()">
+                <span>{{ item.getName() }} - </span>
+                <small>Giá: {{ item.getPrice() | numberFormatter }}</small>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
     <span class="fill-remaining-space"></span>
     <a *ngIf="user == null" mat-button color="white" routerLink="/login">Đăng nhập</a>
     <span *ngIf="user">

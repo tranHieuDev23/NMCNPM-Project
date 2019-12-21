@@ -4,6 +4,7 @@ import Category from "../models/category";
 import { HttpClient } from "@angular/common/http";
 import { APIS } from "../configs/api-endpoints";
 import { UserService } from "./user.service";
+import * as JsSearch from "js-search";
 
 @Injectable({
   providedIn: "root"
@@ -125,6 +126,33 @@ export class ProductService {
           this.onProductsUpdated.emit();
           resolve();
         }, reject);
+    });
+  }
+
+  public searchProducts(query: string): Promise<Product[]> {
+    return new Promise((resolve, reject) => {
+      this.getAllProduct(true).then((result) => {
+        const search = new JsSearch.Search("name");
+        search.addIndex("description");
+        search.addIndex("information");
+
+        const documents = result.map((item) => {
+          return {
+            name: item.getName().toLowerCase(),
+            description: item.getDescription().toLowerCase(),
+            information: item.getDetail().getInformation().toLowerCase(),
+            original: item
+          };
+        });
+        search.addDocuments(documents);
+        console.log(documents);
+
+        const searchResults = search.search(query.toLowerCase());
+        console.log(searchResults);
+        resolve(searchResults.map((item) => {
+          return item.original;
+        }));
+      }, reject);
     });
   }
 }

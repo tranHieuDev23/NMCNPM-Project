@@ -58,7 +58,7 @@ export class OrderManagementComponent implements OnInit {
   getOrderStatusString(order: Order): string {
     if (!order.getRestocking())
       return getOrderStatusString(order.getStatus());
-    return getOrderStatusString(order.getStatus()) + " (tạm hết hàng)";
+    return getOrderStatusString(order.getStatus()) + " (tạm thời không đủ hàng)";
   }
 
   getPaymentMethodString(method: PaymentMethod): string {

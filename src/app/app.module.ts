@@ -50,6 +50,7 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { HistoryPageComponent } from './views/pages/history-page/history-page.component';
 import { EditProfileDialogComponent } from './views/elements/edit-profile-dialog/edit-profile-dialog.component';
 import { NumberFormatterPipe } from './views/pipes/number-formatter/number-formatter.pipe';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { NumberFormatterPipe } from './views/pipes/number-formatter/number-forma
     ReactiveFormsModule,
     MatStepperModule,
     FontAwesomeModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatAutocompleteModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
