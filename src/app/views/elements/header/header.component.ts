@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private router: Router
   ) {
-    this.userService.currentUser.subscribe((result) => {
+    this.userService.currentUserChanged.subscribe((result) => {
       this.user = result;
     });
   }

@@ -26,7 +26,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   initAdmins(): void {
-    this.userService.getAllUSer().then(
+    this.userService.getAllUser().then(
       result => {
         this.admins = result;
       },

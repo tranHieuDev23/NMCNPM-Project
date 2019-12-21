@@ -1,9 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import User from "../models/user";
 import { CookieService } from "ngx-cookie-service";
 import { APIS } from "../configs/api-endpoints";
-import { BehaviorSubject } from "rxjs";
 
 const ACCESS_TOKEN_COOKIE = "accessToken";
 
@@ -11,17 +10,23 @@ const ACCESS_TOKEN_COOKIE = "accessToken";
   providedIn: "root"
 })
 export class UserService {
-  public currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public currentUserChanged: EventEmitter<User> = new EventEmitter<User>(null);
+  private currentUser: User = null;
 
   constructor(private http: HttpClient, private cookie: CookieService) {
     this.getLoggedInUser().then(
       result => {
-        this.currentUser.next(result);
+        this.changeCurrentUser(result);
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  private changeCurrentUser(user: User): void {
+    this.currentUserChanged.next(user);
+    this.currentUser = user;
   }
 
   getAccessToken(): string {
@@ -37,7 +42,7 @@ export class UserService {
             const user = User.fromJSON(result.user);
             const accessToken = result.accessToken;
             this.cookie.set(ACCESS_TOKEN_COOKIE, accessToken);
-            this.currentUser.next(user);
+            this.changeCurrentUser(user);
             resolve(user);
           },
           error => {
@@ -58,11 +63,11 @@ export class UserService {
       this.http.post(APIS.LOGOUT_API, { accessToken }).subscribe(
         () => {
           resolve(true);
-          this.currentUser.next(null);
+          this.changeCurrentUser(null);
         },
         () => {
           resolve(false);
-          this.currentUser.next(null);
+          this.changeCurrentUser(null);
         }
       );
     });
@@ -70,6 +75,10 @@ export class UserService {
 
   getLoggedInUser(): Promise<User> {
     return new Promise((resolve, reject) => {
+      if (this.currentUser) {
+        resolve(this.currentUser);
+        return;
+      }
       const accessToken = this.getAccessToken();
       if (accessToken) {
         this.http
@@ -109,7 +118,7 @@ export class UserService {
     });
   }
 
-  getAllUSer(): Promise<User[]> {
+  getAllUser(): Promise<User[]> {
     return new Promise((resolve, reject) => {
       const accessToken = this.getAccessToken();
       if (!accessToken) {
@@ -164,6 +173,7 @@ export class UserService {
         .toPromise()
         .then(
           () => {
+            this.changeCurrentUser(user);
             resolve();
           },
           error => {
