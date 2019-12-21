@@ -28,7 +28,9 @@ export class LoginPageComponent {
       result => {
         const returnUrl = this.getReturnUrl();
         this.router.navigateByUrl(returnUrl);
-        this.snackbar.open(`Xin chào ${result.getName()}`);
+        this.snackbar.open(`Xin chào ${result.getName()}`, null, {
+          duration: 3000
+        });
       },
       error => {
         console.log(error);
