@@ -7,7 +7,12 @@ enum OrderStatus {
   SHIPPING,
   DONE,
   CANCELLED
-}
+};
+
+enum PaymentMethod {
+  CASH_ON_DELIVERY,
+  BANK_TRANSFER
+};
 
 function getOrderStatusFromId(id: number): OrderStatus {
   switch (id) {
@@ -31,6 +36,7 @@ class Order {
     private orderId: number,
     private orderedUser: User,
     private products: ProductCartItem[],
+    private paymentMethod: PaymentMethod,
     private status: OrderStatus
   ) {}
 
@@ -56,6 +62,7 @@ class Order {
       data.orderId,
       User.fromJSON(data.orderedUser),
       [],
+      data.paymentMethod,
       data.status != null && data.status != undefined
         ? getOrderStatusFromId(data.status)
         : null

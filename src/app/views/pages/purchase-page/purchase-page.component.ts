@@ -12,6 +12,8 @@ import {
   ValidationErrors,
   ValidatorFn
 } from "@angular/forms";
+import { MatStepper } from "@angular/material/stepper";
+import { StepperSelectionEvent } from "@angular/cdk/stepper";
 
 const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
 
@@ -21,6 +23,7 @@ const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
   styleUrls: ["./purchase-page.component.scss"]
 })
 export class PurchasePageComponent implements OnInit {
+  @ViewChild("stepper", { static: true }) stepper: MatStepper;
   public user: User;
   public billingInfoForm: FormGroup;
 
@@ -107,9 +110,12 @@ export class PurchasePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.stepper);
     this.initialize();
-    this.cartSerivce.onItemsChanged.subscribe(() => {
-      this.initialize();
+    this.stepper.selectionChange.subscribe((value: StepperSelectionEvent) => {
+      if (value.previouslySelectedIndex == 0) {
+        this.onSubmitBillingForm();
+      }
     });
   }
 
@@ -140,7 +146,7 @@ export class PurchasePageComponent implements OnInit {
   onSubmitBillingForm(): void {
     if (this.billingInfoForm.invalid) return;
     if (!this.isBillingFormChanged()) return;
-    const newUser = new User(
+    this.user = new User(
       this.user.getUserId(),
       this.user.getUsername(),
       this.billingInfoForm.controls.nameFormControl.value.trim(),
@@ -149,19 +155,6 @@ export class PurchasePageComponent implements OnInit {
       this.billingInfoForm.controls.addressFormControl.value.trim(),
       this.user.getCityRegion(),
       this.user.getRole()
-    );
-    this.userService.updateUser(newUser).then(
-      () => {
-        this.user = newUser;
-      },
-      error => {
-        console.log(error);
-        this.snackbar.open(
-          "Có vấn đề xảy ra trong quá trình cập nhật thông tin người dùng!",
-          null,
-          { duration: 3000 }
-        );
-      }
     );
   }
 }

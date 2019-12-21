@@ -1,6 +1,6 @@
 <div class="content">
     <h2>Thanh toán</h2>
-    <mat-horizontal-stepper linear labelPosition="bottom">
+    <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
         <mat-step [stepControl]="billingInfoForm">
             <ng-template matStepLabel>Thông tin người mua</ng-template>
             <form [formGroup]="billingInfoForm" fxLayout="column" fxLayoutAlign="space-between stretch">
