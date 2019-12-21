@@ -72,7 +72,6 @@ export class SignUpPageComponent {
       this.emailFormControl.value,
       this.phoneFormControl.value,
       this.address.trim(),
-      this.cityRegion.trim(),
       UserRole.USER
     );
     const password: string = this.passwordFormControl.value;

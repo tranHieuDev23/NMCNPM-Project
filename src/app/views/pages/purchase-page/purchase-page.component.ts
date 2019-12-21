@@ -100,7 +100,6 @@ export class PurchasePageComponent implements OnInit {
           result.getEmail(),
           result.getPhone(),
           result.getAddress(),
-          result.getCityRegion(),
           result.getRole()
         );
         this.initalizeBillingForm();
@@ -175,7 +174,6 @@ export class PurchasePageComponent implements OnInit {
       this.billingInfoForm.controls.emailFormControl.value.trim(),
       this.billingInfoForm.controls.phoneFormControl.value.trim(),
       this.billingInfoForm.controls.addressFormControl.value.trim(),
-      this.user.getCityRegion(),
       this.user.getRole()
     );
   }

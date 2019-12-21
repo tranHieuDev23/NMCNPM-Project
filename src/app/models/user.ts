@@ -11,7 +11,6 @@ class User {
     private email: string,
     private phone: string,
     private address: string,
-    private cityRegion: string,
     private role: UserRole
   ) {}
 
@@ -39,10 +38,6 @@ class User {
     return this.address;
   }
 
-  public getCityRegion(): string {
-    return this.cityRegion;
-  }
-
   public getRole(): UserRole {
     return this.role;
   }
@@ -58,7 +53,6 @@ class User {
       data.email,
       data.phone,
       data.address,
-      data.cityRegion,
       data.role
     );
   }
