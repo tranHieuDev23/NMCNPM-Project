@@ -4,7 +4,7 @@ import { UserService } from "src/app/controllers/user.service";
 import User, { UserRole } from "src/app/models/user";
 import { FormControl, Validators, AbstractControl } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const PHONE_REGEX = /\b(0[3|5|7|8|9])+([0-9]{8})\b/;
@@ -48,7 +48,8 @@ export class SignUpPageComponent {
   constructor(
     private userService: UserService,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.passwordFormControl.valueChanges.subscribe(() => {
       this.retypedPasswordFormControl.updateValueAndValidity();
@@ -60,6 +61,10 @@ export class SignUpPageComponent {
       if (!this.allFormControl[i].valid) return false;
     }
     return true;
+  }
+
+  getReturnUrl(): string {
+    return this.route.snapshot.queryParams["returnUrl"] || "/";
   }
 
   onSignUp(): void {
@@ -78,7 +83,8 @@ export class SignUpPageComponent {
       user => {
         this.userService.login(user.getUsername(), password).then(
           () => {
-            this.router.navigateByUrl("/");
+            const returnUrl = this.getReturnUrl();
+            this.router.navigateByUrl(returnUrl);
           },
           error => {
             console.log(error);

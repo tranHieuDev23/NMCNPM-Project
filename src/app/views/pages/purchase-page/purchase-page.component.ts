@@ -90,6 +90,10 @@ export class PurchasePageComponent implements OnInit {
   }
 
   initialize(): void {
+    if (this.cartSerivce.itemCount() == 0) {
+      this.router.navigateByUrl("/");
+      return;
+    }
     this.userService.getLoggedInUser().then(
       result => {
         this.user = result;

@@ -40,4 +40,10 @@ export class LoginPageComponent {
       }
     );
   }
+
+  onSignUp(): void {
+    this.router.navigate(["signup"], {
+      queryParams: { returnUrl: this.getReturnUrl() }
+    });
+  }
 }
