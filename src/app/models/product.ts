@@ -51,8 +51,8 @@ class Product {
     return new Product(
       data.productId,
       data.name,
-      data.price,
-      data.quantity,
+      +data.price,
+      +data.quantity,
       data.description,
       data.image,
       data.thumbImage,

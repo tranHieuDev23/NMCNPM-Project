@@ -97,6 +97,11 @@ export class ProductManagementPageComponent implements OnInit {
                 name: "price"
               }),
               new FormControlItem({
+                placeholder: "Số lượng",
+                name: "quantity",
+                type: "number"
+              }),
+              new FormControlItem({
                 placeholder: "Mô tả ngắn gọn",
                 name: "description"
               }),
@@ -201,6 +206,12 @@ export class ProductManagementPageComponent implements OnInit {
                 placeholder: "Giá",
                 name: "price",
                 value: product.getPrice()
+              }),
+              new FormControlItem({
+                placeholder: "Số lượng",
+                name: "quantity",
+                type: "number",
+                value: product.getQuantity()
               }),
               new FormControlItem({
                 placeholder: "Mô tả ngắn gọn",
